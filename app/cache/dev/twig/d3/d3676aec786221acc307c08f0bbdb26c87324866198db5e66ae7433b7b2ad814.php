@@ -1,7 +1,7 @@
 <?php
 
 /* JanaBundle:Default:index.html.twig */
-class __TwigTemplate_299ba1848b580e0d9e77718de2f3baeaeb7c5f5cfa754e0e7bb3c768d0696917 extends Twig_Template
+class __TwigTemplate_a3a3487ac7241dd63ce959aabd22e688c68b6236271a917b475b14df747b1cc3 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
