@@ -1,7 +1,7 @@
 <?php
 
-/* TestBundle:Default:index.html.twig */
-class __TwigTemplate_28679e2816b06c74b532e4d577efcdc78e5f634632a7e618fab23934ab17e22e extends Twig_Template
+/* JanaBundle:Default:index.html.twig */
+class __TwigTemplate_299ba1848b580e0d9e77718de2f3baeaeb7c5f5cfa754e0e7bb3c768d0696917 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -16,7 +16,7 @@ class __TwigTemplate_28679e2816b06c74b532e4d577efcdc78e5f634632a7e618fab23934ab1
     protected function doDisplay(array $context, array $blocks = array())
     {
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "TestBundle:Default:index.html.twig"));
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "JanaBundle:Default:index.html.twig"));
 
         // line 1
         echo "Hello ";
@@ -30,7 +30,7 @@ class __TwigTemplate_28679e2816b06c74b532e4d577efcdc78e5f634632a7e618fab23934ab1
 
     public function getTemplateName()
     {
-        return "TestBundle:Default:index.html.twig";
+        return "JanaBundle:Default:index.html.twig";
     }
 
     public function isTraitable()
@@ -54,6 +54,6 @@ class __TwigTemplate_28679e2816b06c74b532e4d577efcdc78e5f634632a7e618fab23934ab1
     public function getSourceContext()
     {
         return new Twig_Source("Hello {{ name }}!
-", "TestBundle:Default:index.html.twig", "/home/desenvolvimento/workspace/jana/jana/src/TestBundle/Resources/views/Default/index.html.twig");
+", "JanaBundle:Default:index.html.twig", "/home/desenvolvimento/workspace/jana/src/JanaBundle/Resources/views/Default/index.html.twig");
     }
 }

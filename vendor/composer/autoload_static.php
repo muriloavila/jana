@@ -48,6 +48,10 @@ class ComposerStaticInit99b696bdc1df2a4a83812c2cd21723cc
         array (
             'Monolog\\' => 8,
         ),
+        'J' => 
+        array (
+            'JanaBundle\\' => 11,
+        ),
         'I' => 
         array (
             'Incenteev\\ParameterHandler\\' => 27,
@@ -139,6 +143,10 @@ class ComposerStaticInit99b696bdc1df2a4a83812c2cd21723cc
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'JanaBundle\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/JanaBundle',
         ),
         'Incenteev\\ParameterHandler\\' => 
         array (

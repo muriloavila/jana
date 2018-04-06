@@ -132,9 +132,17 @@ class appTestDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBun
 
         }
 
-        // test_homepage
-        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#sD', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'test_homepage')), array (  '_controller' => 'TestBundle\\Controller\\DefaultController::indexAction',));
+        if (0 === strpos($pathinfo, '/hello')) {
+            // jana_homepage
+            if (preg_match('#^/hello/(?P<name>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'jana_homepage')), array (  '_controller' => 'JanaBundle\\Controller\\DefaultController::indexAction',));
+            }
+
+            // test_homepage
+            if (preg_match('#^/hello/(?P<name>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'test_homepage')), array (  '_controller' => 'TestBundle\\Controller\\DefaultController::indexAction',));
+            }
+
         }
 
         // homepage
