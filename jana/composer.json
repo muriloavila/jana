@@ -25,8 +25,8 @@
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3",
-        "symfony/phpunit-bridge": "~2.7"
+        "phpunit/phpunit": "^5.7",
+        "sensio/generator-bundle": "~2.3"
     },
     "scripts": {
         "symfony-scripts": [
