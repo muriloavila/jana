@@ -1,0 +1,5 @@
+_assetic:
+    resource: .
+    type: assetic
+_app:
+    resource: /home/desenvolvimento/workspace/jana/jana/app/config/routing_dev.yml
