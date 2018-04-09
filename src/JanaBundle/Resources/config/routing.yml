@@ -1,7 +1,19 @@
 jana_homepage:
     path:     /hello/{name}
     defaults: { _controller: JanaBundle:Default:index }
+    methods: [GET]
 
 jana_grava_ponto:
     path:   /ponto/{data}/type/{tipo}
     defaults: {_controller: JanaBundle:Ponto:grava}
+    methods: [POST]
+
+jana_deleta_ponto:
+    path:   /ponto/delete/{id}
+    defaults: {_controller: JanaBundle:Ponto:deleta}
+    methods: [DELETE]
+
+jana_altera_ponto:
+    path:   /ponto/update/{id}
+    defaults: {_controller: JanaBundle:Ponto:altera}
+    methods: [PUT]

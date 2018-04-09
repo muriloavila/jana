@@ -134,12 +134,49 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         // jana_homepage
         if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#sD', $pathinfo, $matches)) {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_jana_homepage;
+            }
+
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'jana_homepage')), array (  '_controller' => 'JanaBundle\\Controller\\DefaultController::indexAction',));
         }
+        not_jana_homepage:
 
-        // jana_grava_ponto
-        if (0 === strpos($pathinfo, '/ponto') && preg_match('#^/ponto/(?P<data>[^/]++)/type/(?P<tipo>[^/]++)$#sD', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'jana_grava_ponto')), array (  '_controller' => 'JanaBundle\\Controller\\PontoController::gravaAction',));
+        if (0 === strpos($pathinfo, '/ponto')) {
+            // jana_grava_ponto
+            if (preg_match('#^/ponto/(?P<data>[^/]++)/type/(?P<tipo>[^/]++)$#sD', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_jana_grava_ponto;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'jana_grava_ponto')), array (  '_controller' => 'JanaBundle\\Controller\\PontoController::gravaAction',));
+            }
+            not_jana_grava_ponto:
+
+            // jana_deleta_ponto
+            if (0 === strpos($pathinfo, '/ponto/delete') && preg_match('#^/ponto/delete/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'DELETE') {
+                    $allow[] = 'DELETE';
+                    goto not_jana_deleta_ponto;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'jana_deleta_ponto')), array (  '_controller' => 'JanaBundle\\Controller\\PontoController::deletaAction',));
+            }
+            not_jana_deleta_ponto:
+
+            // jana_altera_ponto
+            if (0 === strpos($pathinfo, '/ponto/update') && preg_match('#^/ponto/update/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_jana_altera_ponto;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'jana_altera_ponto')), array (  '_controller' => 'JanaBundle\\Controller\\PontoController::alteraAction',));
+            }
+            not_jana_altera_ponto:
+
         }
 
         // test_homepage
