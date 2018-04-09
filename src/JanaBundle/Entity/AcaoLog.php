@@ -52,4 +52,3 @@ class AcaoLog
         return $this->descricao;
     }
 }
-

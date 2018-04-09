@@ -52,4 +52,3 @@ class TipoPonto
         return $this->descricao;
     }
 }
-

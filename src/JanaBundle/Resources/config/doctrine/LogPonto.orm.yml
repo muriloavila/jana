@@ -30,6 +30,12 @@ JanaBundle\Entity\LogPonto:
             options:
                 fixed: false
             column: LOG_IP
+        idPonto:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: ID_PONTO
     manyToOne:
         idAcao:
             targetEntity: AcaoLog
@@ -39,16 +45,6 @@ JanaBundle\Entity\LogPonto:
             inversedBy: null
             joinColumns:
                 ID_ACAO:
-                    referencedColumnName: ID
-            orphanRemoval: false
-        idPonto:
-            targetEntity: Ponto
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                ID_PONTO:
                     referencedColumnName: ID
             orphanRemoval: false
     lifecycleCallbacks: {  }

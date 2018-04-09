@@ -31,7 +31,7 @@ class DefaultControllerTest extends WebTestCase
         $response = $client->getResponse();
         $data = json_decode($response->getContent(), true);
 
-        $this->assertSame(array('response' => 'true'), $data);
+        $this->assertSame(array('response' => true), $data);
     }
 
     public function testInsertDate(){
@@ -50,7 +50,7 @@ class DefaultControllerTest extends WebTestCase
         $response = $client->getResponse();
         $data = json_decode($response->getContent(), true);
 
-        $this->assertSame(array('response' => 'true'), $data);
+        $this->assertSame(array('response' => true), $data);
     }
 
 

@@ -139,4 +139,3 @@ class LogPonto
         return $this->idPonto;
     }
 }
-

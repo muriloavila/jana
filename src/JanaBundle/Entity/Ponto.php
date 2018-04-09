@@ -80,5 +80,37 @@ class Ponto
     {
         return $this->tpPonto;
     }
-}
+    /**
+     * @var string
+     */
+    private $ativo;
 
+
+    /**
+     * Set ativo
+     *
+     * @param string $ativo
+     *
+     * @return Ponto
+     */
+    public function setAtivo($ativo)
+    {
+        $this->ativo = $ativo;
+
+        return $this;
+    }
+
+    /**
+     * Get ativo
+     *
+     * @return string
+     */
+    public function getAtivo()
+    {
+        return $this->ativo;
+    }
+
+    public function __toString() {
+        return (string) $this->id;
+    }
+}

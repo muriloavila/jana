@@ -40,6 +40,7 @@ class PontoController extends Controller
         $ponto = new Ponto();
         $ponto->setDtHrPonto($data);
         $ponto->setTpPonto($tipo_entities);
+        $ponto->setAtivo('1');
 
         try{
             $em->persist($ponto);
@@ -52,9 +53,9 @@ class PontoController extends Controller
         $retorno_log = $logCreate->createLogAction($ponto, 1);
 
         if(!$retorno_log){
-            return new JsonResponse(['response' => 'false', 'message' => utf8_encode('Error: Log cant\'  be created' )]);
+            return new JsonResponse(['response' => false, 'message' => utf8_encode('Error: Log cant\'  be created' )]);
         }
 
-        return new JsonResponse(['response' => 'true']);
+        return new JsonResponse(['response' => true]);
     }
 }
