@@ -1,0 +1,34 @@
+JanaBundle\Entity\Ponto:
+    type: entity
+    table: PONTO
+    indexes:
+        TP_PONTO:
+            columns:
+                - TP_PONTO
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        dtHrPonto:
+            type: datetime
+            nullable: false
+            column: DT_HR_PONTO
+    manyToOne:
+        tpPonto:
+            targetEntity: TipoPonto
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                TP_PONTO:
+                    referencedColumnName: ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

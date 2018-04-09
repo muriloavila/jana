@@ -1,0 +1,54 @@
+JanaBundle\Entity\LogPonto:
+    type: entity
+    table: LOG_PONTO
+    indexes:
+        ID_ACAO:
+            columns:
+                - ID_ACAO
+        ID_PONTO:
+            columns:
+                - ID_PONTO
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        logData:
+            type: datetime
+            nullable: false
+            column: LOG_DATA
+        logIp:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: LOG_IP
+    manyToOne:
+        idAcao:
+            targetEntity: AcaoLog
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ID_ACAO:
+                    referencedColumnName: ID
+            orphanRemoval: false
+        idPonto:
+            targetEntity: Ponto
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ID_PONTO:
+                    referencedColumnName: ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

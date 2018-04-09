@@ -1,3 +1,7 @@
 jana_homepage:
     path:     /hello/{name}
     defaults: { _controller: JanaBundle:Default:index }
+
+jana_grava_ponto:
+    path:   /ponto/{data}/type/{tipo}
+    defaults: {_controller: JanaBundle:Default:grava}
