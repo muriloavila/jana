@@ -139,7 +139,7 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         // jana_grava_ponto
         if (0 === strpos($pathinfo, '/ponto') && preg_match('#^/ponto/(?P<data>[^/]++)/type/(?P<tipo>[^/]++)$#sD', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'jana_grava_ponto')), array (  '_controller' => 'JanaBundle\\Controller\\DefaultController::gravaAction',));
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'jana_grava_ponto')), array (  '_controller' => 'JanaBundle\\Controller\\PontoController::gravaAction',));
         }
 
         // test_homepage

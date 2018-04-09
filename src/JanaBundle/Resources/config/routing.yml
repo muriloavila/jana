@@ -4,4 +4,4 @@ jana_homepage:
 
 jana_grava_ponto:
     path:   /ponto/{data}/type/{tipo}
-    defaults: {_controller: JanaBundle:Default:grava}
+    defaults: {_controller: JanaBundle:Ponto:grava}

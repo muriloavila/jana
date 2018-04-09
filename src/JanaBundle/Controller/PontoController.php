@@ -48,6 +48,13 @@ class PontoController extends Controller
             return new JsonResponse(['response' => false, 'message' => utf8_encode($e->getMessage())]);
         }
 
+        $logCreate = new LogController($em, $this->container);
+        $retorno_log = $logCreate->createLogAction($ponto, 1);
+
+        if(!$retorno_log){
+            return new JsonResponse(['response' => 'false', 'message' => utf8_encode('Error: Log cant\'  be created' )]);
+        }
+
         return new JsonResponse(['response' => 'true']);
     }
 }

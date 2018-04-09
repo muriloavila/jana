@@ -31,8 +31,32 @@ class DefaultControllerTest extends WebTestCase
         $response = $client->getResponse();
         $data = json_decode($response->getContent(), true);
 
-        $this->assertSame(array('response' => 'true'), $data[0]);
+        $this->assertSame(array('response' => 'true'), $data);
     }
+
+    public function testInsertDate(){
+        $client = static::createClient();
+
+        $client->request('GET',
+            '/ponto/2018-04-09%2012:10:05/type/2',
+            array(),
+            array(),
+            array(
+                'HTTP_CONTENT_TYPE' => 'application/x-www-form-urlencoded; charset=UTF-8',
+                'HTTP_ACCEPT'       => 'application/json'
+            )
+        );
+
+        $response = $client->getResponse();
+        $data = json_decode($response->getContent(), true);
+
+        $this->assertSame(array('response' => 'true'), $data);
+    }
+
+
+
 }
+
+?>
 
 
