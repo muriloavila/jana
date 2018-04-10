@@ -25,7 +25,7 @@ class PontoController extends Controller
         }else{
             $data = \DateTime::createFromFormat('Y-m-d H:i:s', $data);
             if($data == false){
-                return new JsonResponse(['response' => false, 'message' => utf8_encode('Error parsing DateTime')]);
+                return new JsonResponse(['response' => false, 'message' => utf8_encode('Error parsing DateTime')], 400);
             }
         }
 
@@ -34,7 +34,7 @@ class PontoController extends Controller
 
         $tipo_entities = $this->buscaTipo($tipo, $em);
         if(!$tipo_entities instanceof TipoPonto){
-            return new JsonResponse($tipo_entities);
+            return new JsonResponse($tipo_entities, 400);
         }
 
         $ponto = new Ponto();
@@ -46,24 +46,24 @@ class PontoController extends Controller
             $em->persist($ponto);
             $em->flush();
         }catch (Exception $e){
-            return new JsonResponse(['response' => false, 'message' => utf8_encode($e->getMessage())]);
+            return new JsonResponse(['response' => false, 'message' => utf8_encode($e->getMessage())], 500);
         }
 
         $logCreate = new LogController($em, $this->container);
         $retorno_log = $logCreate->createLogAction($ponto, 1);
 
         if(!$retorno_log){
-            return new JsonResponse(['response' => false, 'message' => utf8_encode('Error: Log cant\'  be created' )]);
+            return new JsonResponse(['response' => false, 'message' => utf8_encode('Error: Log cant\'  be created' )], 500);
         }
 
-        return new JsonResponse(['response' => true]);
+        return new JsonResponse(['response' => true], 200);
     }
 
 
     public function deletaAction($id = null)
     {
         if($id == null && empty($id)){
-            return new JsonResponse(['response' => false, 'message' => utf8_encode('Error: Id is Empty')]);
+            return new JsonResponse(['response' => false, 'message' => utf8_encode('Error: Id is Empty')], 400);
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -71,7 +71,7 @@ class PontoController extends Controller
         $ponto = $this->buscaPonto($id, $em);
 
         if(!$ponto instanceof Ponto){
-            return new JsonResponse($ponto);
+            return new JsonResponse($ponto, 400);
         }
 
 
@@ -82,17 +82,17 @@ class PontoController extends Controller
 
             $em->flush();
         }catch (\Exception $e){
-            return new JsonResponse(['response' => false, 'message' => utf8_encode($e->getMessage())]);
+            return new JsonResponse(['response' => false, 'message' => utf8_encode($e->getMessage())], 500);
         }
 
-        return new JsonResponse(['response' => true, 'id' => $id]);
+        return new JsonResponse(['response' => true, 'id' => $id], 200);
     }
 
     public function alteraAction(Request $request, $id = null)
     {
         if($id == null){
             if($id == null && empty($id)){
-                return new JsonResponse(['response' => false, 'message' => utf8_encode('Error: Id is Empty')]);
+                return new JsonResponse(['response' => false, 'message' => utf8_encode('Error: Id is Empty')], 400);
             }
         }
 
@@ -101,7 +101,7 @@ class PontoController extends Controller
         $ponto = $this->buscaPonto($id, $em);
 
         if(!$ponto instanceof Ponto){
-            return new JsonResponse($ponto);
+            return new JsonResponse($ponto, 400);
         }
 
         $date = $request->query->get('date');
@@ -113,14 +113,14 @@ class PontoController extends Controller
         }else{
             $date = \DateTime::createFromFormat('Y-m-d H:i:s', $date);
             if($date == false){
-                return new JsonResponse(['response' => false, 'message' => utf8_encode('Error parsing DateTime')]);
+                return new JsonResponse(['response' => false, 'message' => utf8_encode('Error parsing DateTime')], 400);
             }
         }
 
 
         $tipo = $this->buscaTipo($tipo_id, $em);
         if(!$tipo instanceof TipoPonto){
-            return new JsonResponse($tipo);
+            return new JsonResponse($tipo, 400);
         }
 
         $ponto->setDtHrPonto($date);
@@ -135,10 +135,24 @@ class PontoController extends Controller
 
             $em->flush();
         }catch (\Exception $e){
-            return new JsonResponse(['response' => false, 'message' => utf8_encode($e->getMessage())]);
+            return new JsonResponse(['response' => false, 'message' => utf8_encode($e->getMessage())], 500);
         }
 
         return new JsonResponse(array('response' => true));
+    }
+
+    public function buscaAction($data = null)
+    {
+        if($data == null){
+            return new JsonResponse(['response' => false, 'message' => utf8_encode('Data Is Empty')], 400);
+        }
+
+        $date = \DateTime::createFromFormat('Y-m-d H:i:s', $data);
+        if($date == false){
+            return new JsonResponse(['response' => false, 'message' => utf8_encode('Error parsing DateTime')], 400);
+        }
+
+
     }
 
 

@@ -168,8 +168,8 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
             // jana_altera_ponto
             if (0 === strpos($pathinfo, '/ponto/update') && preg_match('#^/ponto/update/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
-                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                if ($this->context->getMethod() != 'PUT') {
+                    $allow[] = 'PUT';
                     goto not_jana_altera_ponto;
                 }
 

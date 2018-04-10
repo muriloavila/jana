@@ -177,6 +177,17 @@ class appTestDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBun
             }
             not_jana_altera_ponto:
 
+            // jana_busca_ponto
+            if (preg_match('#^/ponto/(?P<data>[^/]++)$#sD', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_jana_busca_ponto;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'jana_busca_ponto')), array (  '_controller' => 'JanaBundle\\Controller\\PontoController::buscaAction',));
+            }
+            not_jana_busca_ponto:
+
         }
 
         // test_homepage

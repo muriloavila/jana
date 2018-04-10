@@ -79,3 +79,9 @@ bf53a4,127.0.0.1,GET,http://127.0.0.1:8000/ponto/update/36?date=now&tipo=3,15232
 1f1b3c,127.0.0.1,GET,http://127.0.0.1:8000/ponto/update/36?date=now&tipo=3,1523299621,,200
 982178,127.0.0.1,GET,http://127.0.0.1:8000/ponto/update/36?date=now&tipo=3,1523300030,,200
 16c0b7,127.0.0.1,GET,http://127.0.0.1:8000/ponto/update/36?date=now&tipo=3,1523300471,,200
+21b15c,127.0.0.1,GET,http://127.0.0.1:8000/ponto/now/type/1,1523365845,9164ae,200
+9164ae,127.0.0.1,GET,http://127.0.0.1:8000/ponto/now/type/1,1523365847,,405
+aecdb5,127.0.0.1,POST,http://127.0.0.1:8000/ponto/now/type/1,1523365888,,200
+046412,127.0.0.1,POST,http://127.0.0.1:8000/ponto/now/type/2,1523366109,,200
+53d8a5,127.0.0.1,POST,http://127.0.0.1:8000/ponto/now/type/3,1523366635,,200
+7b5e20,127.0.0.1,POST,http://127.0.0.1:8000/ponto/now/type/4,1523367120,,200

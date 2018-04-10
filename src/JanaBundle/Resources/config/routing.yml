@@ -17,3 +17,8 @@ jana_altera_ponto:
     path:   /ponto/update/{id}
     defaults: {_controller: JanaBundle:Ponto:altera}
     methods: [PUT]
+
+jana_busca_ponto:
+    path:   /ponto/{data}
+    defaults: {_controller: JanaBundle:Ponto:busca}
+    methods: [GET]
