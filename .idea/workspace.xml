@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="906e3eb3-8fd8-4fee-b7fd-26dc9b28ee69" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/cache/dev/appDevDebugProjectContainerUrlGenerator.php.meta" afterPath="$PROJECT_DIR$/app/cache/dev/appDevDebugProjectContainerUrlGenerator.php.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/cache/dev/appDevDebugProjectContainerUrlGenerator.php" afterPath="$PROJECT_DIR$/app/cache/dev/appDevDebugProjectContainerUrlGenerator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/cache/dev/appDevDebugProjectContainerUrlMatcher.php" afterPath="$PROJECT_DIR$/app/cache/dev/appDevDebugProjectContainerUrlMatcher.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/cache/dev/profiler/index.csv" afterPath="$PROJECT_DIR$/app/cache/dev/profiler/index.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/logs/dev.log" afterPath="$PROJECT_DIR$/app/logs/dev.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JanaBundle/Controller/PontoController.php" afterPath="$PROJECT_DIR$/src/JanaBundle/Controller/PontoController.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,10 +27,10 @@
         <entry file="file://$PROJECT_DIR$/src/JanaBundle/Controller/PontoController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="528">
-              <caret line="166" column="8" lean-forward="false" selection-start-line="166" selection-start-column="8" selection-end-line="166" selection-end-column="8" />
+              <caret line="166" column="0" lean-forward="false" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
               <folding>
                 <element signature="e#41#72#0#PHP" expanded="true" />
-                <element signature="e#5701#6177#0#PHP" expanded="false" />
+                <element signature="e#5693#6169#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -184,15 +178,15 @@
       <workItem from="1523032312684" duration="6052000" />
       <workItem from="1523042683732" duration="3204000" />
       <workItem from="1523277818126" duration="23244000" />
-      <workItem from="1523365052741" duration="9025000" />
+      <workItem from="1523365052741" duration="9619000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41525000" />
+    <option name="totallyTimeSpent" value="42119000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1602" height="850" extended-state="6" />
+    <frame x="-1" y="25" width="1602" height="850" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -241,7 +235,7 @@
           <caret line="171" column="5" lean-forward="true" selection-start-line="171" selection-start-column="5" selection-end-line="171" selection-end-column="5" />
           <folding>
             <element signature="e#41#72#0#PHP" expanded="true" />
-            <element signature="e#5701#6177#0#PHP" expanded="false" />
+            <element signature="e#5693#6169#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -497,10 +491,10 @@
     <entry file="file://$PROJECT_DIR$/src/JanaBundle/Controller/PontoController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
-          <caret line="166" column="8" lean-forward="false" selection-start-line="166" selection-start-column="8" selection-end-line="166" selection-end-column="8" />
+          <caret line="166" column="0" lean-forward="false" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
           <folding>
             <element signature="e#41#72#0#PHP" expanded="true" />
-            <element signature="e#5701#6177#0#PHP" expanded="false" />
+            <element signature="e#5693#6169#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>

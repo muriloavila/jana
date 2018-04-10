@@ -164,7 +164,7 @@ class PontoController extends Controller
         $qb->select('c')->from('JanaBundle:Ponto', 'c')->where('c.dtHrPonto BETWEEN :data_inicio AND :data_final')->setParameter('data_inicio', $data_inicio)->setParameter('data_final', $data_final);
         $query = $qb->getQuery()->getScalarResult();
 
-        
+
         return new JsonResponse($query);
 
 
