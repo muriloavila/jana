@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit9c52f2207d60e454af86e6318fe8cf85
+class ComposerStaticInit99b696bdc1df2a4a83812c2cd21723cc
 {
     public static $files = array (
         '92c8763cd6170fce6fcfe7e26b4e8c10' => __DIR__ . '/..' . '/symfony/phpunit-bridge/bootstrap.php',
@@ -21,6 +21,7 @@ class ComposerStaticInit9c52f2207d60e454af86e6318fe8cf85
         'T' => 
         array (
             'Twig\\' => 5,
+            'TestBundle\\' => 11,
         ),
         'S' => 
         array (
@@ -47,13 +48,20 @@ class ComposerStaticInit9c52f2207d60e454af86e6318fe8cf85
         array (
             'Monolog\\' => 8,
         ),
+        'J' => 
+        array (
+            'JanaBundle\\' => 11,
+        ),
         'I' => 
         array (
             'Incenteev\\ParameterHandler\\' => 27,
         ),
         'D' => 
         array (
+            'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\Common\\Cache\\' => 22,
+            'Doctrine\\Common\\Annotations\\' => 28,
+            'Doctrine\\Common\\' => 16,
             'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 36,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
         ),
@@ -67,6 +75,10 @@ class ComposerStaticInit9c52f2207d60e454af86e6318fe8cf85
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
+        'TestBundle\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/TestBundle',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -132,13 +144,29 @@ class ComposerStaticInit9c52f2207d60e454af86e6318fe8cf85
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'JanaBundle\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/JanaBundle',
+        ),
         'Incenteev\\ParameterHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/incenteev/composer-parameter-handler',
         ),
+        'Doctrine\\Instantiator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
+        ),
         'Doctrine\\Common\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
+        ),
+        'Doctrine\\Common\\Annotations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/annotations/lib/Doctrine/Common/Annotations',
+        ),
+        'Doctrine\\Common\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
         ),
         'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 
         array (
@@ -199,14 +227,6 @@ class ComposerStaticInit9c52f2207d60e454af86e6318fe8cf85
             array (
                 0 => __DIR__ . '/..' . '/doctrine/collections/lib',
             ),
-            'Doctrine\\Common\\Annotations\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/annotations/lib',
-            ),
-            'Doctrine\\Common\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/common/lib',
-            ),
         ),
         'A' => 
         array (
@@ -229,10 +249,10 @@ class ComposerStaticInit9c52f2207d60e454af86e6318fe8cf85
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit9c52f2207d60e454af86e6318fe8cf85::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit9c52f2207d60e454af86e6318fe8cf85::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit9c52f2207d60e454af86e6318fe8cf85::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit9c52f2207d60e454af86e6318fe8cf85::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit99b696bdc1df2a4a83812c2cd21723cc::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit99b696bdc1df2a4a83812c2cd21723cc::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit99b696bdc1df2a4a83812c2cd21723cc::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit99b696bdc1df2a4a83812c2cd21723cc::$classMap;
 
         }, null, ClassLoader::class);
     }

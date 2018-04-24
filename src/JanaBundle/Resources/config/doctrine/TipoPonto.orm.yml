@@ -1,0 +1,23 @@
+JanaBundle\Entity\TipoPonto:
+    type: entity
+    repositoryClass: JanaBundle\Repository\TipoPontoRepository
+    table: TIPO_PONTO
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        descricao:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: DESCRICAO
+    lifecycleCallbacks: {  }
