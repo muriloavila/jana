@@ -1,14 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: desenvolvimento
- * Date: 24/04/18
- * Time: 10:47
- */
 namespace JanaBundle\Services;
 
 use Doctrine\ORM\EntityManager;
+use JanaBundle\Entity\LogPonto;
 use Symfony\Component\DependencyInjection\Container;
+use JanaBundle\Entity\Ponto;
 
 class PontoService
 {
@@ -66,5 +62,26 @@ class PontoService
 
 
         return $retorno;
+    }
+
+    public function setNewPonto($data, $tipo){
+        $ponto = new Ponto();
+        $ponto->setDtHrPonto($data);
+        $ponto->setTpPonto($tipo);
+
+
+        $retorno = $this->entityManager->getRepository('JanaBundle:Ponto')->insertPonto($ponto);
+
+        if(!($retorno instanceof Ponto)){
+            return array('error' => true, 'message' => utf8_encode('Error in persist new Ponto'));
+        }
+
+
+        $log = $this->container->get('jana.log_ponto')->createLog($ponto, 1);
+
+        if(!($log instanceof LogPonto)){
+            return array('error' => true, 'message' => utf8_encode('Error in create Log'));
+        }
+        return true;
     }
 }

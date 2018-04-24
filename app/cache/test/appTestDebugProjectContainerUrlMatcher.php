@@ -178,7 +178,7 @@ class appTestDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBun
             not_jana_altera_ponto:
 
             // jana_busca_ponto
-            if (preg_match('#^/ponto/(?P<data>[^/]++)$#sD', $pathinfo, $matches)) {
+            if (preg_match('#^/ponto/(?P<tipo>[^/]++)/(?P<data>[^/]++)$#sD', $pathinfo, $matches)) {
                 if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                     $allow = array_merge($allow, array('GET', 'HEAD'));
                     goto not_jana_busca_ponto;

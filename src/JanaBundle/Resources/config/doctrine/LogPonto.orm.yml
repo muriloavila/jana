@@ -1,5 +1,6 @@
 JanaBundle\Entity\LogPonto:
     type: entity
+    repositoryClass: JanaBundle\Repository\LogPontoRepository
     table: LOG_PONTO
     indexes:
         ID_ACAO:

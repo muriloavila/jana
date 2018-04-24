@@ -1,5 +1,6 @@
 JanaBundle\Entity\TipoPonto:
     type: entity
+    repositoryClass: JanaBundle\Repository\TipoPontoRepository
     table: TIPO_PONTO
     id:
         id:

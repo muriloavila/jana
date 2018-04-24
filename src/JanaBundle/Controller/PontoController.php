@@ -29,36 +29,18 @@ class PontoController extends Controller
             }
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $tipoServices = $this->get('jana.tipo_ponto');
+        $tipo_entities = $tipoServices->getTipoById($tipo);
 
+        $pontoService = $this->get('jana.ponto');
+        $pontoNew = $pontoService->setNewPonto($data, $tipo_entities);
 
-        $tipo_entities = $this->buscaTipo($tipo, $em);
-        if(!$tipo_entities instanceof TipoPonto){
-            return new JsonResponse($tipo_entities, 400);
-        }
-
-        $ponto = new Ponto();
-        $ponto->setDtHrPonto($data);
-        $ponto->setTpPonto($tipo_entities);
-        $ponto->setAtivo('1');
-
-        try{
-            $em->persist($ponto);
-            $em->flush();
-        }catch (Exception $e){
-            return new JsonResponse(['response' => false, 'message' => utf8_encode($e->getMessage())], 500);
-        }
-
-        $logCreate = new LogController($em, $this->container);
-        $retorno_log = $logCreate->createLogAction($ponto, 1);
-
-        if(!$retorno_log){
-            return new JsonResponse(['response' => false, 'message' => utf8_encode('Error: Log cant\'  be created' )], 500);
+        if(is_array($pontoNew)){
+            return new JsonResponse($pontoNew, 400);
         }
 
         return new JsonResponse(['response' => true], 200);
     }
-
 
     public function deletaAction($id = null)
     {

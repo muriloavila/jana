@@ -1,5 +1,6 @@
 JanaBundle\Entity\AcaoLog:
     type: entity
+    repositoryClass: JanaBundle\Repository\AcaoLogRepository
     table: ACAO_LOG
     id:
         id:
