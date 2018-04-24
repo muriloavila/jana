@@ -40,7 +40,7 @@ class PontoService
 
         $retorno = $this->entityManager->getRepository('JanaBundle:Ponto')->findAllById($id);
 
-        return $retorno->toJson();
+        return $retorno;
     }
 
     public function getPontoByDay($day){
@@ -54,14 +54,9 @@ class PontoService
             return ['response' => false, 'message' => utf8_encode('Error parsing DateTime')];
         }
 
-        $retorno = array();
         $pontos = $this->entityManager->getRepository('JanaBundle:Ponto')->findAllByDay($data_inicio, $data_final);
-        foreach ($pontos as $ponto) {
-            $retorno[] = $ponto->toJson();
-        }
 
-
-        return $retorno;
+        return $pontos;
     }
 
     public function setNewPonto($data, $tipo){
@@ -83,5 +78,57 @@ class PontoService
             return array('error' => true, 'message' => utf8_encode('Error in create Log'));
         }
         return true;
+    }
+
+    public function delete($ponto){
+        if(!($ponto instanceof Ponto)){
+            return array('error' => true, 'message' => utf8_encode('Ponto has no value'));
+        }
+
+        $retorno = $this->entityManager->getRepository('JanaBundle:Ponto')->removePonto($ponto);
+
+        if(!($retorno instanceof Ponto)){
+            return array('error' => true, 'message' => utf8_encode('Error in remove Ponto'));
+        }
+
+        $log = $this->container->get('jana.log_ponto')->createLog($ponto, 3);
+
+        if(!($log instanceof LogPonto)){
+            return array('error' => true, 'message' => utf8_encode('Error in create Log'));
+        }
+        return true;
+    }
+
+    public function altera(Ponto $ponto, $date, $tipo_id){
+        if($date == 'now'){
+            $date = new \DateTime();
+        }else{
+            $date = \DateTime::createFromFormat('Y-m-d H:i:s', $date);
+            if($date == false){
+                return ['response' => false, 'message' => utf8_encode('Error parsing DateTime')];
+            }
+        }
+
+        $tipo = $this->container->get('jana.tipo_ponto')->getTipoById($tipo_id);
+
+        if(is_array($tipo)){
+            return $tipo;
+        }
+
+        $ponto->setTpPonto($tipo);
+        $ponto->setDtHrPonto($date);
+
+        $retorno = $this->entityManager->getRepository('JanaBundle:Ponto')->updatePonto($ponto);
+
+        if(!($retorno instanceof Ponto)){
+            return array('error' => true, 'message' => utf8_encode('Error on Ponto update'));
+        }
+
+        $log = $this->container->get('jana.log_ponto')->createLog($ponto, 2);
+
+        if(!($log instanceof LogPonto)){
+            return array('error' => true, 'message' => utf8_encode('Error in create Log'));
+        }
+        return $ponto;
     }
 }

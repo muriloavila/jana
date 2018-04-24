@@ -142,7 +142,10 @@ class appDevDebugProjectContainer extends Container
             'fragment.renderer.hinclude' => 'getFragment_Renderer_HincludeService',
             'fragment.renderer.inline' => 'getFragment_Renderer_InlineService',
             'http_kernel' => 'getHttpKernelService',
+            'jana.acao_log' => 'getJana_AcaoLogService',
+            'jana.log_ponto' => 'getJana_LogPontoService',
             'jana.ponto' => 'getJana_PontoService',
+            'jana.tipo_ponto' => 'getJana_TipoPontoService',
             'kernel' => 'getKernelService',
             'locale_listener' => 'getLocaleListenerService',
             'logger' => 'getLoggerService',
@@ -1505,6 +1508,26 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the public 'jana.acao_log' shared service.
+     *
+     * @return \JanaBundle\Services\AcaoLogService
+     */
+    protected function getJana_AcaoLogService()
+    {
+        return $this->services['jana.acao_log'] = new \JanaBundle\Services\AcaoLogService($this, $this->get('doctrine.orm.default_entity_manager'));
+    }
+
+    /**
+     * Gets the public 'jana.log_ponto' shared service.
+     *
+     * @return \JanaBundle\Services\LogPontoService
+     */
+    protected function getJana_LogPontoService()
+    {
+        return $this->services['jana.log_ponto'] = new \JanaBundle\Services\LogPontoService($this, $this->get('doctrine.orm.default_entity_manager'));
+    }
+
+    /**
      * Gets the public 'jana.ponto' shared service.
      *
      * @return \JanaBundle\Services\PontoService
@@ -1512,6 +1535,16 @@ class appDevDebugProjectContainer extends Container
     protected function getJana_PontoService()
     {
         return $this->services['jana.ponto'] = new \JanaBundle\Services\PontoService($this, $this->get('doctrine.orm.default_entity_manager'));
+    }
+
+    /**
+     * Gets the public 'jana.tipo_ponto' shared service.
+     *
+     * @return \JanaBundle\Services\TipoPontoService
+     */
+    protected function getJana_TipoPontoService()
+    {
+        return $this->services['jana.tipo_ponto'] = new \JanaBundle\Services\TipoPontoService($this, $this->get('doctrine.orm.default_entity_manager'));
     }
 
     /**
@@ -1978,7 +2011,7 @@ class appDevDebugProjectContainer extends Container
 
         $e = new \Symfony\Component\Security\Http\AccessMap();
 
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($e, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider(array())), 'main', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '5adf3b75ccb747.44721147', $a, $c), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $e, $c)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($d, $d), 'main', NULL, NULL, NULL, $a, false));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($e, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider(array())), 'main', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '5adf7debcbe622.01234629', $a, $c), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $e, $c)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($d, $d), 'main', NULL, NULL, NULL, $a, false));
     }
 
     /**
@@ -3059,7 +3092,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('5adf3b75ccb747.44721147')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('5adf7debcbe622.01234629')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 

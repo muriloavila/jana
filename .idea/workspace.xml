@@ -2,29 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="906e3eb3-8fd8-4fee-b7fd-26dc9b28ee69" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/JanaBundle/Repository/AcaoLogRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/JanaBundle/Repository/LogPontoRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/JanaBundle/Repository/TipoPontoRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/JanaBundle/Services/AcaoLogService.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/JanaBundle/Services/LogPontoService.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/JanaBundle/Services/TipoPontoService.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/JanaBundle/Tests/Controller/UnitarioTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/cache/test/appTestDebugProjectContainerUrlMatcher.php.meta" afterPath="$PROJECT_DIR$/app/cache/test/appTestDebugProjectContainerUrlMatcher.php.meta" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/JanaBundle/Controller/RelatorioController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/cache/test/appTestDebugProjectContainer.php" afterPath="$PROJECT_DIR$/app/cache/test/appTestDebugProjectContainer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/cache/test/appTestDebugProjectContainer.php.meta" afterPath="$PROJECT_DIR$/app/cache/test/appTestDebugProjectContainer.php.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/cache/test/appTestDebugProjectContainer.xml" afterPath="$PROJECT_DIR$/app/cache/test/appTestDebugProjectContainer.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/cache/test/appTestDebugProjectContainerCompiler.log" afterPath="$PROJECT_DIR$/app/cache/test/appTestDebugProjectContainerCompiler.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/cache/test/appTestDebugProjectContainerUrlMatcher.php" afterPath="$PROJECT_DIR$/app/cache/test/appTestDebugProjectContainerUrlMatcher.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/cache/dev/appDevDebugProjectContainer.php" afterPath="$PROJECT_DIR$/app/cache/dev/appDevDebugProjectContainer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/cache/dev/appDevDebugProjectContainer.xml" afterPath="$PROJECT_DIR$/app/cache/dev/appDevDebugProjectContainer.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/cache/dev/profiler/index.csv" afterPath="$PROJECT_DIR$/app/cache/dev/profiler/index.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/cache/test/doctrine/orm/Proxies/__CG__JanaBundleEntityTipoPonto.php" afterPath="$PROJECT_DIR$/app/cache/test/doctrine/orm/Proxies/__CG__JanaBundleEntityTipoPonto.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/logs/dev.log" afterPath="$PROJECT_DIR$/app/logs/dev.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/logs/test.log" afterPath="$PROJECT_DIR$/app/logs/test.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JanaBundle/Controller/LogController.php" afterPath="$PROJECT_DIR$/src/JanaBundle/Controller/LogController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JanaBundle/Controller/PontoController.php" afterPath="$PROJECT_DIR$/src/JanaBundle/Controller/PontoController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JanaBundle/Repository/PontoRepository.php" afterPath="$PROJECT_DIR$/src/JanaBundle/Repository/PontoRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JanaBundle/Resources/config/doctrine/AcaoLog.orm.yml" afterPath="$PROJECT_DIR$/src/JanaBundle/Resources/config/doctrine/AcaoLog.orm.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JanaBundle/Resources/config/doctrine/LogPonto.orm.yml" afterPath="$PROJECT_DIR$/src/JanaBundle/Resources/config/doctrine/LogPonto.orm.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JanaBundle/Resources/config/doctrine/TipoPonto.orm.yml" afterPath="$PROJECT_DIR$/src/JanaBundle/Resources/config/doctrine/TipoPonto.orm.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JanaBundle/Resources/config/services.yml" afterPath="$PROJECT_DIR$/src/JanaBundle/Resources/config/services.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JanaBundle/Resources/config/routing.yml" afterPath="$PROJECT_DIR$/src/JanaBundle/Resources/config/routing.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JanaBundle/Services/PontoService.php" afterPath="$PROJECT_DIR$/src/JanaBundle/Services/PontoService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JanaBundle/Tests/Controller/DefaultControllerTest.php" afterPath="$PROJECT_DIR$/src/JanaBundle/Tests/Controller/DefaultControllerTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JanaBundle/Tests/Controller/UnitarioTest.php" afterPath="$PROJECT_DIR$/src/JanaBundle/Tests/Controller/UnitarioTest.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,7 +26,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LogPontoService.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/JanaBundle/Resources/config/routing.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="28" column="18" lean-forward="true" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RelatorioController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/JanaBundle/Controller/RelatorioController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogPontoService.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/JanaBundle/Services/LogPontoService.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="588">
@@ -48,16 +59,53 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="PontoController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/JanaBundle/Controller/PontoController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-793">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding>
+                <element signature="e#41#69#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UnitarioTest.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/JanaBundle/Tests/Controller/UnitarioTest.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="611">
+              <caret line="124" column="5" lean-forward="true" selection-start-line="124" selection-start-column="5" selection-end-line="124" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="PontoService.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/JanaBundle/Services/PontoService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="599">
-              <caret line="79" column="62" lean-forward="false" selection-start-line="79" selection-start-column="62" selection-end-line="79" selection-end-column="62" />
+            <state relative-caret-position="683">
+              <caret line="131" column="21" lean-forward="false" selection-start-line="131" selection-start-column="21" selection-end-line="131" selection-end-column="21" />
               <folding>
                 <element signature="e#38#69#0#PHP" expanded="true" />
                 <element signature="e#893#911#1#PHP" expanded="true" />
-                <element signature="e#1513#1531#1#PHP" expanded="true" />
-                <element signature="e#1906#1924#1#PHP" expanded="true" />
+                <element signature="e#1475#1493#1#PHP" expanded="true" />
+                <element signature="e#1775#1793#1#PHP" expanded="true" />
+                <element signature="e#2454#2472#1#PHP" expanded="true" />
+                <element signature="e#3535#3553#1#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TipoPontoService.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/JanaBundle/Services/TipoPontoService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="348">
+              <caret line="29" column="20" lean-forward="false" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
+              <folding>
+                <element signature="e#38#69#0#PHP" expanded="true" />
+                <element signature="e#855#877#1#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,10 +115,20 @@
         <entry file="file://$PROJECT_DIR$/src/JanaBundle/Repository/LogPontoRepository.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="108">
-              <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+              <caret line="9" column="36" lean-forward="false" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
               <folding>
                 <element signature="e#41#75#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultControllerTest.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/JanaBundle/Tests/Controller/DefaultControllerTest.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="587">
+              <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -78,48 +136,12 @@
       <file leaf-file-name="PontoRepository.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/JanaBundle/Repository/PontoRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="11" column="85" lean-forward="true" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="85" />
+            <state relative-caret-position="588">
+              <caret line="49" column="9" lean-forward="false" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
               <folding>
                 <element signature="e#41#75#0#PHP" expanded="true" />
                 <element signature="e#305#323#1#PHP" expanded="true" />
                 <element signature="e#516#534#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/JanaBundle/Resources/config/services.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="18" column="74" lean-forward="false" selection-start-line="18" selection-start-column="74" selection-end-line="18" selection-end-column="74" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AcaoLogService.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/JanaBundle/Services/AcaoLogService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="29" column="37" lean-forward="false" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="37" />
-              <folding>
-                <element signature="e#38#69#0#PHP" expanded="true" />
-                <element signature="e#839#859#1#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AcaoLogRepository.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/JanaBundle/Repository/AcaoLogRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="10" column="109" lean-forward="false" selection-start-line="10" selection-start-column="109" selection-end-line="10" selection-end-column="109" />
-              <folding>
-                <element signature="e#40#74#0#PHP" expanded="true" />
-                <element signature="e#278#298#1#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -150,16 +172,11 @@
         <option value="$PROJECT_DIR$/src/TestBundle/Tests/Controller/DefaultControllerTest.php" />
         <option value="$PROJECT_DIR$/src/JanaBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/JanaBundle/Tests/Controller/ErrorControllerTest.php" />
-        <option value="$PROJECT_DIR$/src/JanaBundle/Tests/Controller/DefaultControllerTest.php" />
-        <option value="$PROJECT_DIR$/src/JanaBundle/Resources/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/JanaBundle/Entity/Ponto.php" />
         <option value="$PROJECT_DIR$/src/JanaBundle/Resources/config/doctrine/Ponto.orm.yml" />
         <option value="$PROJECT_DIR$/src/JanaBundle/Resources/config/doctrine/TipoPonto.orm.yml" />
         <option value="$PROJECT_DIR$/src/JanaBundle/Repository/TipoPontoRepository.php" />
         <option value="$PROJECT_DIR$/src/JanaBundle/Services/TipoPontoService.php" />
-        <option value="$PROJECT_DIR$/src/JanaBundle/Repository/PontoRepository.php" />
-        <option value="$PROJECT_DIR$/src/JanaBundle/Tests/Controller/UnitarioTest.php" />
-        <option value="$PROJECT_DIR$/src/JanaBundle/Controller/PontoController.php" />
         <option value="$PROJECT_DIR$/src/JanaBundle/Controller/LogController.php" />
         <option value="$PROJECT_DIR$/src/JanaBundle/Resources/config/doctrine/LogPonto.orm.yml" />
         <option value="$PROJECT_DIR$/src/JanaBundle/Resources/config/doctrine/AcaoLog.orm.yml" />
@@ -167,8 +184,14 @@
         <option value="$PROJECT_DIR$/src/JanaBundle/Resources/config/services.yml" />
         <option value="$PROJECT_DIR$/src/JanaBundle/Repository/AcaoLogRepository.php" />
         <option value="$PROJECT_DIR$/src/JanaBundle/Services/AcaoLogService.php" />
-        <option value="$PROJECT_DIR$/src/JanaBundle/Services/PontoService.php" />
         <option value="$PROJECT_DIR$/src/JanaBundle/Services/LogPontoService.php" />
+        <option value="$PROJECT_DIR$/src/JanaBundle/Repository/PontoRepository.php" />
+        <option value="$PROJECT_DIR$/src/JanaBundle/Services/PontoService.php" />
+        <option value="$PROJECT_DIR$/src/JanaBundle/Controller/PontoController.php" />
+        <option value="$PROJECT_DIR$/src/JanaBundle/Tests/Controller/DefaultControllerTest.php" />
+        <option value="$PROJECT_DIR$/src/JanaBundle/Tests/Controller/UnitarioTest.php" />
+        <option value="$PROJECT_DIR$/src/JanaBundle/Resources/config/routing.yml" />
+        <option value="$PROJECT_DIR$/src/JanaBundle/Controller/RelatorioController.php" />
       </list>
     </option>
   </component>
@@ -326,12 +349,12 @@
       <workItem from="1523277818126" duration="23244000" />
       <workItem from="1523365052741" duration="9619000" />
       <workItem from="1524316306578" duration="3574000" />
-      <workItem from="1524577437229" duration="10924000" />
+      <workItem from="1524577437229" duration="18278000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56617000" />
+    <option name="totallyTimeSpent" value="63971000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="1602" height="850" extended-state="6" />
@@ -364,19 +387,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Tests/Controller/ErrorControllerTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1692">
-          <caret line="146" column="89" lean-forward="false" selection-start-line="146" selection-start-column="89" selection-end-line="146" selection-end-column="89" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/JanaBundle/Resources/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="24">
@@ -538,14 +553,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="21" column="32" lean-forward="false" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/JanaBundle/Entity/Ponto.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="567">
@@ -577,39 +584,6 @@
         <state relative-caret-position="705">
           <caret line="146" column="89" lean-forward="false" selection-start-line="146" selection-start-column="89" selection-end-line="146" selection-end-column="89" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Tests/Controller/UnitarioTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="51" column="5" lean-forward="false" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Tests/Controller/DefaultControllerTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13">
-          <caret line="53" column="5" lean-forward="true" selection-start-line="36" selection-start-column="4" selection-end-line="53" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Controller/PontoController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="e#41#72#0#PHP" expanded="true" />
-            <element signature="e#395#499#0#PHP" expanded="false" />
-            <element signature="e#505#1282#0#PHP" expanded="false" />
-            <element signature="e#2108#3647#0#PHP" expanded="false" />
-            <element signature="e#3653#4382#0#PHP" expanded="false" />
-            <element signature="e#4389#4835#0#PHP" expanded="false" />
-            <element signature="e#4495#4513#1#PHP" expanded="true" />
-            <element signature="e#4957#4979#1#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -653,29 +627,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Services/TipoPontoService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="27" column="5" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="27" selection-end-column="5" />
-          <folding>
-            <element signature="e#38#69#0#PHP" expanded="true" />
-            <element signature="e#855#877#1#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Repository/PontoRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="11" column="85" lean-forward="true" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="85" />
-          <folding>
-            <element signature="e#41#75#0#PHP" expanded="true" />
-            <element signature="e#305#323#1#PHP" expanded="true" />
-            <element signature="e#516#534#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/JanaBundle/Repository/AcaoLogRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -698,25 +649,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Services/TipoPontoService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="29" column="20" lean-forward="false" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
+          <folding>
+            <element signature="e#38#69#0#PHP" expanded="true" />
+            <element signature="e#855#877#1#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/JanaBundle/Repository/LogPontoRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+          <caret line="9" column="36" lean-forward="false" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
           <folding>
             <element signature="e#41#75#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Services/PontoService.php">
+    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Repository/PontoRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="599">
-          <caret line="79" column="62" lean-forward="false" selection-start-line="79" selection-start-column="62" selection-end-line="79" selection-end-column="62" />
+        <state relative-caret-position="588">
+          <caret line="49" column="9" lean-forward="false" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
           <folding>
-            <element signature="e#38#69#0#PHP" expanded="true" />
-            <element signature="e#893#911#1#PHP" expanded="true" />
-            <element signature="e#1513#1531#1#PHP" expanded="true" />
-            <element signature="e#1906#1924#1#PHP" expanded="true" />
+            <element signature="e#41#75#0#PHP" expanded="true" />
+            <element signature="e#305#323#1#PHP" expanded="true" />
+            <element signature="e#516#534#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -729,6 +690,63 @@
             <element signature="e#129#160#0#PHP" expanded="true" />
             <element signature="e#1105#1126#1#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Services/PontoService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="683">
+          <caret line="131" column="21" lean-forward="false" selection-start-line="131" selection-start-column="21" selection-end-line="131" selection-end-column="21" />
+          <folding>
+            <element signature="e#38#69#0#PHP" expanded="true" />
+            <element signature="e#893#911#1#PHP" expanded="true" />
+            <element signature="e#1475#1493#1#PHP" expanded="true" />
+            <element signature="e#1775#1793#1#PHP" expanded="true" />
+            <element signature="e#2454#2472#1#PHP" expanded="true" />
+            <element signature="e#3535#3553#1#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Controller/PontoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-793">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding>
+            <element signature="e#41#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Tests/Controller/DefaultControllerTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="587">
+          <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Tests/Controller/UnitarioTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="611">
+          <caret line="124" column="5" lean-forward="true" selection-start-line="124" selection-start-column="5" selection-end-line="124" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="28" column="18" lean-forward="true" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JanaBundle/Controller/RelatorioController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>

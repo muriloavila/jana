@@ -28,6 +28,25 @@ class PontoRepository extends EntityRepository
         }catch (Exception $e){
             return false;
         }
+    }
 
+    public function removePonto($ponto){
+        try{
+            $this->getEntityManager()->remove($ponto);
+            $this->getEntityManager()->flush();
+            return $ponto;
+        }catch (Exception $e){
+            return false;
+        }
+    }
+
+    public function updatePonto($ponto){
+        try{
+            $this->getEntityManager()->persist($ponto);
+            $this->getEntityManager()->flush();
+            return $ponto;
+        }catch (Exception $e){
+            return false;
+        }
     }
 }
