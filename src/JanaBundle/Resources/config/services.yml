@@ -2,3 +2,6 @@ services:
 #    jana.example:
 #        class: JanaBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+      jana.ponto:
+          class: JanaBundle\Services\PontoService
+          arguments: ["@service_container","@doctrine.orm.entity_manager"]

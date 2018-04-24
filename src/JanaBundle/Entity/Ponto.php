@@ -113,4 +113,12 @@ class Ponto
     public function __toString() {
         return (string) $this->id;
     }
+
+    public function toJson(){
+        return array(
+            'id' => $this->id,
+            'tipo' => $this->getTpPonto()->getDescricao(),
+            'DataHr' => $this->getDtHrPonto()->format('d/m/Y H:i:s')
+        );
+    }
 }

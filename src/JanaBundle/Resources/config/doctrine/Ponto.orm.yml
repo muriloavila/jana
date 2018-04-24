@@ -1,5 +1,6 @@
 JanaBundle\Entity\Ponto:
     type: entity
+    repositoryClass: JanaBundle\Repository\PontoRepository
     table: PONTO
     indexes:
         TP_PONTO:

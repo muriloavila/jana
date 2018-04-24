@@ -141,33 +141,30 @@ class PontoController extends Controller
         return new JsonResponse(array('response' => true));
     }
 
-    public function buscaAction($data = null)
+    public function buscaAction($tipo = null, $data = null)
     {
         if($data == null){
             return new JsonResponse(['response' => false, 'message' => utf8_encode('Data Is Empty')], 400);
         }
 
-        $data_inicio    = $data." 00:00:00";
-        $data_final     = $data." 23:59:59";
-
-        $data_inicio = \DateTime::createFromFormat('Y-m-d H:i:s', $data_inicio);
-        $data_final  = \DateTime::createFromFormat('Y-m-d H:i:s', $data_final);
-
-        if($data_inicio == false || $data_final == false){
-            return new JsonResponse(['response' => false, 'message' => utf8_encode('Error parsing DateTime')], 400);
+        if($tipo ==  null){
+            return new JsonResponse(['response' => false, 'message' => utf8_encode('Id is Empty')], 400);
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $pontoService = $this->container->get('jana.ponto');
 
-        $qb = $em->createQueryBuilder();
+        if(strtoupper($tipo) == "ID"){
+            $busca = $pontoService->getPontoById($data);
 
-        $qb->select('c')->from('JanaBundle:Ponto', 'c')->where('c.dtHrPonto BETWEEN :data_inicio AND :data_final')->setParameter('data_inicio', $data_inicio)->setParameter('data_final', $data_final);
-        $query = $qb->getQuery()->getScalarResult();
+            return new JsonResponse($busca);
+        }
 
+        if(strtoupper($tipo) == "DAY"){
 
-        return new JsonResponse($query);
+            $busca = $pontoService->getPontoByDay($data);
 
-
+            return new JsonResponse($busca);
+        }
 
     }
 

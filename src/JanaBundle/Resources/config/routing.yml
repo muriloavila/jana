@@ -19,6 +19,6 @@ jana_altera_ponto:
     methods: [PUT]
 
 jana_busca_ponto:
-    path:   /ponto/{data}
+    path:   /ponto/{tipo}/{data}
     defaults: {_controller: JanaBundle:Ponto:busca}
     methods: [GET]
