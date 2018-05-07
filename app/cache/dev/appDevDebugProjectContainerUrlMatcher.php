@@ -190,6 +190,17 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        // jana_relatorio_ponto
+        if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<relatorio>[^/]++)$#sD', $pathinfo, $matches)) {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_jana_relatorio_ponto;
+            }
+
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'jana_relatorio_ponto')), array (  '_controller' => 'JanaBundle\\Controller\\RelatorioController::buscaAction',));
+        }
+        not_jana_relatorio_ponto:
+
         // test_homepage
         if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#sD', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'test_homepage')), array (  '_controller' => 'TestBundle\\Controller\\DefaultController::indexAction',));

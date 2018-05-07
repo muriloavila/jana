@@ -3,15 +3,17 @@
 namespace JanaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class RelatorioController extends Controller
 {
     public function indexAction($name)
     {
-        return $this->render('', array('name' => $name));
+        var_dump($name);
+        return true;
     }
 
-    public function buscaAction($relatorio){
-        
+    public function buscaAction($relatorio = null){
+        return new JsonResponse(["resposta" => $relatorio]);
     }
 }

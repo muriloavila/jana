@@ -1351,7 +1351,7 @@ class Response
 {
 const HTTP_CONTINUE = 100;
 const HTTP_SWITCHING_PROTOCOLS = 101;
-const HTTP_PROCESSING = 102; const HTTP_OK = 200;
+const HTTP_PROCESSING = 102; const HTTP_EARLY_HINTS = 103; const HTTP_OK = 200;
 const HTTP_CREATED = 201;
 const HTTP_ACCEPTED = 202;
 const HTTP_NON_AUTHORITATIVE_INFORMATION = 203;
@@ -2422,11 +2422,11 @@ protected $booted = false;
 protected $name;
 protected $startTime;
 protected $loadClassCache;
-const VERSION ='2.7.45';
-const VERSION_ID = 20745;
+const VERSION ='2.7.46';
+const VERSION_ID = 20746;
 const MAJOR_VERSION = 2;
 const MINOR_VERSION = 7;
-const RELEASE_VERSION = 45;
+const RELEASE_VERSION = 46;
 const EXTRA_VERSION ='';
 const END_OF_MAINTENANCE ='05/2018';
 const END_OF_LIFE ='05/2019';
