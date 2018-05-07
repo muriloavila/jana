@@ -5337,3 +5337,1868 @@ return $ret;
 }
 class_alias('Twig_Template','Twig\Template', false);
 }
+namespace Monolog\Formatter
+{
+interface FormatterInterface
+{
+public function format(array $record);
+public function formatBatch(array $records);
+}
+}
+namespace Monolog\Formatter
+{
+use Exception;
+class NormalizerFormatter implements FormatterInterface
+{
+const SIMPLE_DATE ="Y-m-d H:i:s";
+protected $dateFormat;
+public function __construct($dateFormat = null)
+{
+$this->dateFormat = $dateFormat ?: static::SIMPLE_DATE;
+if (!function_exists('json_encode')) {
+throw new \RuntimeException('PHP\'s json extension is required to use Monolog\'s NormalizerFormatter');
+}
+}
+public function format(array $record)
+{
+return $this->normalize($record);
+}
+public function formatBatch(array $records)
+{
+foreach ($records as $key => $record) {
+$records[$key] = $this->format($record);
+}
+return $records;
+}
+protected function normalize($data)
+{
+if (null === $data || is_scalar($data)) {
+if (is_float($data)) {
+if (is_infinite($data)) {
+return ($data > 0 ?'':'-') .'INF';
+}
+if (is_nan($data)) {
+return'NaN';
+}
+}
+return $data;
+}
+if (is_array($data)) {
+$normalized = array();
+$count = 1;
+foreach ($data as $key => $value) {
+if ($count++ >= 1000) {
+$normalized['...'] ='Over 1000 items ('.count($data).' total), aborting normalization';
+break;
+}
+$normalized[$key] = $this->normalize($value);
+}
+return $normalized;
+}
+if ($data instanceof \DateTime) {
+return $data->format($this->dateFormat);
+}
+if (is_object($data)) {
+if ($data instanceof Exception || (PHP_VERSION_ID > 70000 && $data instanceof \Throwable)) {
+return $this->normalizeException($data);
+}
+if (method_exists($data,'__toString') && !$data instanceof \JsonSerializable) {
+$value = $data->__toString();
+} else {
+$value = $this->toJson($data, true);
+}
+return sprintf("[object] (%s: %s)", get_class($data), $value);
+}
+if (is_resource($data)) {
+return sprintf('[resource] (%s)', get_resource_type($data));
+}
+return'[unknown('.gettype($data).')]';
+}
+protected function normalizeException($e)
+{
+if (!$e instanceof Exception && !$e instanceof \Throwable) {
+throw new \InvalidArgumentException('Exception/Throwable expected, got '.gettype($e).' / '.get_class($e));
+}
+$data = array('class'=> get_class($e),'message'=> $e->getMessage(),'code'=> $e->getCode(),'file'=> $e->getFile().':'.$e->getLine(),
+);
+if ($e instanceof \SoapFault) {
+if (isset($e->faultcode)) {
+$data['faultcode'] = $e->faultcode;
+}
+if (isset($e->faultactor)) {
+$data['faultactor'] = $e->faultactor;
+}
+if (isset($e->detail)) {
+$data['detail'] = $e->detail;
+}
+}
+$trace = $e->getTrace();
+foreach ($trace as $frame) {
+if (isset($frame['file'])) {
+$data['trace'][] = $frame['file'].':'.$frame['line'];
+} elseif (isset($frame['function']) && $frame['function'] ==='{closure}') {
+$data['trace'][] = $frame['function'];
+} else {
+$data['trace'][] = $this->toJson($this->normalize($frame), true);
+}
+}
+if ($previous = $e->getPrevious()) {
+$data['previous'] = $this->normalizeException($previous);
+}
+return $data;
+}
+protected function toJson($data, $ignoreErrors = false)
+{
+if ($ignoreErrors) {
+return @$this->jsonEncode($data);
+}
+$json = $this->jsonEncode($data);
+if ($json === false) {
+$json = $this->handleJsonError(json_last_error(), $data);
+}
+return $json;
+}
+private function jsonEncode($data)
+{
+if (version_compare(PHP_VERSION,'5.4.0','>=')) {
+return json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+}
+return json_encode($data);
+}
+private function handleJsonError($code, $data)
+{
+if ($code !== JSON_ERROR_UTF8) {
+$this->throwEncodeError($code, $data);
+}
+if (is_string($data)) {
+$this->detectAndCleanUtf8($data);
+} elseif (is_array($data)) {
+array_walk_recursive($data, array($this,'detectAndCleanUtf8'));
+} else {
+$this->throwEncodeError($code, $data);
+}
+$json = $this->jsonEncode($data);
+if ($json === false) {
+$this->throwEncodeError(json_last_error(), $data);
+}
+return $json;
+}
+private function throwEncodeError($code, $data)
+{
+switch ($code) {
+case JSON_ERROR_DEPTH:
+$msg ='Maximum stack depth exceeded';
+break;
+case JSON_ERROR_STATE_MISMATCH:
+$msg ='Underflow or the modes mismatch';
+break;
+case JSON_ERROR_CTRL_CHAR:
+$msg ='Unexpected control character found';
+break;
+case JSON_ERROR_UTF8:
+$msg ='Malformed UTF-8 characters, possibly incorrectly encoded';
+break;
+default:
+$msg ='Unknown error';
+}
+throw new \RuntimeException('JSON encoding failed: '.$msg.'. Encoding: '.var_export($data, true));
+}
+public function detectAndCleanUtf8(&$data)
+{
+if (is_string($data) && !preg_match('//u', $data)) {
+$data = preg_replace_callback('/[\x80-\xFF]+/',
+function ($m) { return utf8_encode($m[0]); },
+$data
+);
+$data = str_replace(
+array('¤','¦','¨','´','¸','¼','½','¾'),
+array('€','Š','š','Ž','ž','Œ','œ','Ÿ'),
+$data
+);
+}
+}
+}
+}
+namespace Monolog\Formatter
+{
+class LineFormatter extends NormalizerFormatter
+{
+const SIMPLE_FORMAT ="[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
+protected $format;
+protected $allowInlineLineBreaks;
+protected $ignoreEmptyContextAndExtra;
+protected $includeStacktraces;
+public function __construct($format = null, $dateFormat = null, $allowInlineLineBreaks = false, $ignoreEmptyContextAndExtra = false)
+{
+$this->format = $format ?: static::SIMPLE_FORMAT;
+$this->allowInlineLineBreaks = $allowInlineLineBreaks;
+$this->ignoreEmptyContextAndExtra = $ignoreEmptyContextAndExtra;
+parent::__construct($dateFormat);
+}
+public function includeStacktraces($include = true)
+{
+$this->includeStacktraces = $include;
+if ($this->includeStacktraces) {
+$this->allowInlineLineBreaks = true;
+}
+}
+public function allowInlineLineBreaks($allow = true)
+{
+$this->allowInlineLineBreaks = $allow;
+}
+public function ignoreEmptyContextAndExtra($ignore = true)
+{
+$this->ignoreEmptyContextAndExtra = $ignore;
+}
+public function format(array $record)
+{
+$vars = parent::format($record);
+$output = $this->format;
+foreach ($vars['extra'] as $var => $val) {
+if (false !== strpos($output,'%extra.'.$var.'%')) {
+$output = str_replace('%extra.'.$var.'%', $this->stringify($val), $output);
+unset($vars['extra'][$var]);
+}
+}
+foreach ($vars['context'] as $var => $val) {
+if (false !== strpos($output,'%context.'.$var.'%')) {
+$output = str_replace('%context.'.$var.'%', $this->stringify($val), $output);
+unset($vars['context'][$var]);
+}
+}
+if ($this->ignoreEmptyContextAndExtra) {
+if (empty($vars['context'])) {
+unset($vars['context']);
+$output = str_replace('%context%','', $output);
+}
+if (empty($vars['extra'])) {
+unset($vars['extra']);
+$output = str_replace('%extra%','', $output);
+}
+}
+foreach ($vars as $var => $val) {
+if (false !== strpos($output,'%'.$var.'%')) {
+$output = str_replace('%'.$var.'%', $this->stringify($val), $output);
+}
+}
+if (false !== strpos($output,'%')) {
+$output = preg_replace('/%(?:extra|context)\..+?%/','', $output);
+}
+return $output;
+}
+public function formatBatch(array $records)
+{
+$message ='';
+foreach ($records as $record) {
+$message .= $this->format($record);
+}
+return $message;
+}
+public function stringify($value)
+{
+return $this->replaceNewlines($this->convertToString($value));
+}
+protected function normalizeException($e)
+{
+if (!$e instanceof \Exception && !$e instanceof \Throwable) {
+throw new \InvalidArgumentException('Exception/Throwable expected, got '.gettype($e).' / '.get_class($e));
+}
+$previousText ='';
+if ($previous = $e->getPrevious()) {
+do {
+$previousText .=', '.get_class($previous).'(code: '.$previous->getCode().'): '.$previous->getMessage().' at '.$previous->getFile().':'.$previous->getLine();
+} while ($previous = $previous->getPrevious());
+}
+$str ='[object] ('.get_class($e).'(code: '.$e->getCode().'): '.$e->getMessage().' at '.$e->getFile().':'.$e->getLine().$previousText.')';
+if ($this->includeStacktraces) {
+$str .="\n[stacktrace]\n".$e->getTraceAsString()."\n";
+}
+return $str;
+}
+protected function convertToString($data)
+{
+if (null === $data || is_bool($data)) {
+return var_export($data, true);
+}
+if (is_scalar($data)) {
+return (string) $data;
+}
+if (version_compare(PHP_VERSION,'5.4.0','>=')) {
+return $this->toJson($data, true);
+}
+return str_replace('\\/','/', @json_encode($data));
+}
+protected function replaceNewlines($str)
+{
+if ($this->allowInlineLineBreaks) {
+if (0 === strpos($str,'{')) {
+return str_replace(array('\r','\n'), array("\r","\n"), $str);
+}
+return $str;
+}
+return str_replace(array("\r\n","\r","\n"),' ', $str);
+}
+}
+}
+namespace Monolog\Handler
+{
+use Monolog\Formatter\FormatterInterface;
+interface HandlerInterface
+{
+public function isHandling(array $record);
+public function handle(array $record);
+public function handleBatch(array $records);
+public function pushProcessor($callback);
+public function popProcessor();
+public function setFormatter(FormatterInterface $formatter);
+public function getFormatter();
+}
+}
+namespace Monolog\Handler
+{
+use Monolog\Logger;
+use Monolog\Formatter\FormatterInterface;
+use Monolog\Formatter\LineFormatter;
+abstract class AbstractHandler implements HandlerInterface
+{
+protected $level = Logger::DEBUG;
+protected $bubble = true;
+protected $formatter;
+protected $processors = array();
+public function __construct($level = Logger::DEBUG, $bubble = true)
+{
+$this->setLevel($level);
+$this->bubble = $bubble;
+}
+public function isHandling(array $record)
+{
+return $record['level'] >= $this->level;
+}
+public function handleBatch(array $records)
+{
+foreach ($records as $record) {
+$this->handle($record);
+}
+}
+public function close()
+{
+}
+public function pushProcessor($callback)
+{
+if (!is_callable($callback)) {
+throw new \InvalidArgumentException('Processors must be valid callables (callback or object with an __invoke method), '.var_export($callback, true).' given');
+}
+array_unshift($this->processors, $callback);
+return $this;
+}
+public function popProcessor()
+{
+if (!$this->processors) {
+throw new \LogicException('You tried to pop from an empty processor stack.');
+}
+return array_shift($this->processors);
+}
+public function setFormatter(FormatterInterface $formatter)
+{
+$this->formatter = $formatter;
+return $this;
+}
+public function getFormatter()
+{
+if (!$this->formatter) {
+$this->formatter = $this->getDefaultFormatter();
+}
+return $this->formatter;
+}
+public function setLevel($level)
+{
+$this->level = Logger::toMonologLevel($level);
+return $this;
+}
+public function getLevel()
+{
+return $this->level;
+}
+public function setBubble($bubble)
+{
+$this->bubble = $bubble;
+return $this;
+}
+public function getBubble()
+{
+return $this->bubble;
+}
+public function __destruct()
+{
+try {
+$this->close();
+} catch (\Exception $e) {
+} catch (\Throwable $e) {
+}
+}
+protected function getDefaultFormatter()
+{
+return new LineFormatter();
+}
+}
+}
+namespace Monolog\Handler
+{
+abstract class AbstractProcessingHandler extends AbstractHandler
+{
+public function handle(array $record)
+{
+if (!$this->isHandling($record)) {
+return false;
+}
+$record = $this->processRecord($record);
+$record['formatted'] = $this->getFormatter()->format($record);
+$this->write($record);
+return false === $this->bubble;
+}
+abstract protected function write(array $record);
+protected function processRecord(array $record)
+{
+if ($this->processors) {
+foreach ($this->processors as $processor) {
+$record = call_user_func($processor, $record);
+}
+}
+return $record;
+}
+}
+}
+namespace Monolog\Handler
+{
+use Monolog\Logger;
+class StreamHandler extends AbstractProcessingHandler
+{
+protected $stream;
+protected $url;
+private $errorMessage;
+protected $filePermission;
+protected $useLocking;
+private $dirCreated;
+public function __construct($stream, $level = Logger::DEBUG, $bubble = true, $filePermission = null, $useLocking = false)
+{
+parent::__construct($level, $bubble);
+if (is_resource($stream)) {
+$this->stream = $stream;
+} elseif (is_string($stream)) {
+$this->url = $stream;
+} else {
+throw new \InvalidArgumentException('A stream must either be a resource or a string.');
+}
+$this->filePermission = $filePermission;
+$this->useLocking = $useLocking;
+}
+public function close()
+{
+if ($this->url && is_resource($this->stream)) {
+fclose($this->stream);
+}
+$this->stream = null;
+}
+public function getStream()
+{
+return $this->stream;
+}
+public function getUrl()
+{
+return $this->url;
+}
+protected function write(array $record)
+{
+if (!is_resource($this->stream)) {
+if (null === $this->url ||''=== $this->url) {
+throw new \LogicException('Missing stream url, the stream can not be opened. This may be caused by a premature call to close().');
+}
+$this->createDir();
+$this->errorMessage = null;
+set_error_handler(array($this,'customErrorHandler'));
+$this->stream = fopen($this->url,'a');
+if ($this->filePermission !== null) {
+@chmod($this->url, $this->filePermission);
+}
+restore_error_handler();
+if (!is_resource($this->stream)) {
+$this->stream = null;
+throw new \UnexpectedValueException(sprintf('The stream or file "%s" could not be opened: '.$this->errorMessage, $this->url));
+}
+}
+if ($this->useLocking) {
+flock($this->stream, LOCK_EX);
+}
+$this->streamWrite($this->stream, $record);
+if ($this->useLocking) {
+flock($this->stream, LOCK_UN);
+}
+}
+protected function streamWrite($stream, array $record)
+{
+fwrite($stream, (string) $record['formatted']);
+}
+private function customErrorHandler($code, $msg)
+{
+$this->errorMessage = preg_replace('{^(fopen|mkdir)\(.*?\): }','', $msg);
+}
+private function getDirFromStream($stream)
+{
+$pos = strpos($stream,'://');
+if ($pos === false) {
+return dirname($stream);
+}
+if ('file://'=== substr($stream, 0, 7)) {
+return dirname(substr($stream, 7));
+}
+return;
+}
+private function createDir()
+{
+if ($this->dirCreated) {
+return;
+}
+$dir = $this->getDirFromStream($this->url);
+if (null !== $dir && !is_dir($dir)) {
+$this->errorMessage = null;
+set_error_handler(array($this,'customErrorHandler'));
+$status = mkdir($dir, 0777, true);
+restore_error_handler();
+if (false === $status) {
+throw new \UnexpectedValueException(sprintf('There is no existing directory at "%s" and its not buildable: '.$this->errorMessage, $dir));
+}
+}
+$this->dirCreated = true;
+}
+}
+}
+namespace Monolog\Handler
+{
+use Monolog\Handler\FingersCrossed\ErrorLevelActivationStrategy;
+use Monolog\Handler\FingersCrossed\ActivationStrategyInterface;
+use Monolog\Logger;
+class FingersCrossedHandler extends AbstractHandler
+{
+protected $handler;
+protected $activationStrategy;
+protected $buffering = true;
+protected $bufferSize;
+protected $buffer = array();
+protected $stopBuffering;
+protected $passthruLevel;
+public function __construct($handler, $activationStrategy = null, $bufferSize = 0, $bubble = true, $stopBuffering = true, $passthruLevel = null)
+{
+if (null === $activationStrategy) {
+$activationStrategy = new ErrorLevelActivationStrategy(Logger::WARNING);
+}
+if (!$activationStrategy instanceof ActivationStrategyInterface) {
+$activationStrategy = new ErrorLevelActivationStrategy($activationStrategy);
+}
+$this->handler = $handler;
+$this->activationStrategy = $activationStrategy;
+$this->bufferSize = $bufferSize;
+$this->bubble = $bubble;
+$this->stopBuffering = $stopBuffering;
+if ($passthruLevel !== null) {
+$this->passthruLevel = Logger::toMonologLevel($passthruLevel);
+}
+if (!$this->handler instanceof HandlerInterface && !is_callable($this->handler)) {
+throw new \RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a Monolog\Handler\HandlerInterface object");
+}
+}
+public function isHandling(array $record)
+{
+return true;
+}
+public function activate()
+{
+if ($this->stopBuffering) {
+$this->buffering = false;
+}
+if (!$this->handler instanceof HandlerInterface) {
+$record = end($this->buffer) ?: null;
+$this->handler = call_user_func($this->handler, $record, $this);
+if (!$this->handler instanceof HandlerInterface) {
+throw new \RuntimeException("The factory callable should return a HandlerInterface");
+}
+}
+$this->handler->handleBatch($this->buffer);
+$this->buffer = array();
+}
+public function handle(array $record)
+{
+if ($this->processors) {
+foreach ($this->processors as $processor) {
+$record = call_user_func($processor, $record);
+}
+}
+if ($this->buffering) {
+$this->buffer[] = $record;
+if ($this->bufferSize > 0 && count($this->buffer) > $this->bufferSize) {
+array_shift($this->buffer);
+}
+if ($this->activationStrategy->isHandlerActivated($record)) {
+$this->activate();
+}
+} else {
+$this->handler->handle($record);
+}
+return false === $this->bubble;
+}
+public function close()
+{
+if (null !== $this->passthruLevel) {
+$level = $this->passthruLevel;
+$this->buffer = array_filter($this->buffer, function ($record) use ($level) {
+return $record['level'] >= $level;
+});
+if (count($this->buffer) > 0) {
+$this->handler->handleBatch($this->buffer);
+$this->buffer = array();
+}
+}
+}
+public function reset()
+{
+$this->buffering = true;
+}
+public function clear()
+{
+$this->buffer = array();
+$this->reset();
+}
+}
+}
+namespace Monolog\Handler
+{
+use Monolog\Logger;
+class FilterHandler extends AbstractHandler
+{
+protected $handler;
+protected $acceptedLevels;
+protected $bubble;
+public function __construct($handler, $minLevelOrList = Logger::DEBUG, $maxLevel = Logger::EMERGENCY, $bubble = true)
+{
+$this->handler = $handler;
+$this->bubble = $bubble;
+$this->setAcceptedLevels($minLevelOrList, $maxLevel);
+if (!$this->handler instanceof HandlerInterface && !is_callable($this->handler)) {
+throw new \RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a Monolog\Handler\HandlerInterface object");
+}
+}
+public function getAcceptedLevels()
+{
+return array_flip($this->acceptedLevels);
+}
+public function setAcceptedLevels($minLevelOrList = Logger::DEBUG, $maxLevel = Logger::EMERGENCY)
+{
+if (is_array($minLevelOrList)) {
+$acceptedLevels = array_map('Monolog\Logger::toMonologLevel', $minLevelOrList);
+} else {
+$minLevelOrList = Logger::toMonologLevel($minLevelOrList);
+$maxLevel = Logger::toMonologLevel($maxLevel);
+$acceptedLevels = array_values(array_filter(Logger::getLevels(), function ($level) use ($minLevelOrList, $maxLevel) {
+return $level >= $minLevelOrList && $level <= $maxLevel;
+}));
+}
+$this->acceptedLevels = array_flip($acceptedLevels);
+}
+public function isHandling(array $record)
+{
+return isset($this->acceptedLevels[$record['level']]);
+}
+public function handle(array $record)
+{
+if (!$this->isHandling($record)) {
+return false;
+}
+if (!$this->handler instanceof HandlerInterface) {
+$this->handler = call_user_func($this->handler, $record, $this);
+if (!$this->handler instanceof HandlerInterface) {
+throw new \RuntimeException("The factory callable should return a HandlerInterface");
+}
+}
+if ($this->processors) {
+foreach ($this->processors as $processor) {
+$record = call_user_func($processor, $record);
+}
+}
+$this->handler->handle($record);
+return false === $this->bubble;
+}
+public function handleBatch(array $records)
+{
+$filtered = array();
+foreach ($records as $record) {
+if ($this->isHandling($record)) {
+$filtered[] = $record;
+}
+}
+$this->handler->handleBatch($filtered);
+}
+}
+}
+namespace Monolog\Handler
+{
+class TestHandler extends AbstractProcessingHandler
+{
+protected $records = array();
+protected $recordsByLevel = array();
+public function getRecords()
+{
+return $this->records;
+}
+public function clear()
+{
+$this->records = array();
+$this->recordsByLevel = array();
+}
+public function hasRecords($level)
+{
+return isset($this->recordsByLevel[$level]);
+}
+public function hasRecord($record, $level)
+{
+if (is_array($record)) {
+$record = $record['message'];
+}
+return $this->hasRecordThatPasses(function ($rec) use ($record) {
+return $rec['message'] === $record;
+}, $level);
+}
+public function hasRecordThatContains($message, $level)
+{
+return $this->hasRecordThatPasses(function ($rec) use ($message) {
+return strpos($rec['message'], $message) !== false;
+}, $level);
+}
+public function hasRecordThatMatches($regex, $level)
+{
+return $this->hasRecordThatPasses(function ($rec) use ($regex) {
+return preg_match($regex, $rec['message']) > 0;
+}, $level);
+}
+public function hasRecordThatPasses($predicate, $level)
+{
+if (!is_callable($predicate)) {
+throw new \InvalidArgumentException("Expected a callable for hasRecordThatSucceeds");
+}
+if (!isset($this->recordsByLevel[$level])) {
+return false;
+}
+foreach ($this->recordsByLevel[$level] as $i => $rec) {
+if (call_user_func($predicate, $rec, $i)) {
+return true;
+}
+}
+return false;
+}
+protected function write(array $record)
+{
+$this->recordsByLevel[$record['level']][] = $record;
+$this->records[] = $record;
+}
+public function __call($method, $args)
+{
+if (preg_match('/(.*)(Debug|Info|Notice|Warning|Error|Critical|Alert|Emergency)(.*)/', $method, $matches) > 0) {
+$genericMethod = $matches[1] . ('Records'!== $matches[3] ?'Record':'') . $matches[3];
+$level = constant('Monolog\Logger::'. strtoupper($matches[2]));
+if (method_exists($this, $genericMethod)) {
+$args[] = $level;
+return call_user_func_array(array($this, $genericMethod), $args);
+}
+}
+throw new \BadMethodCallException('Call to undefined method '. get_class($this) .'::'. $method .'()');
+}
+}
+}
+namespace Psr\Log
+{
+interface LoggerInterface
+{
+public function emergency($message, array $context = array());
+public function alert($message, array $context = array());
+public function critical($message, array $context = array());
+public function error($message, array $context = array());
+public function warning($message, array $context = array());
+public function notice($message, array $context = array());
+public function info($message, array $context = array());
+public function debug($message, array $context = array());
+public function log($level, $message, array $context = array());
+}
+}
+namespace Monolog
+{
+use Monolog\Handler\HandlerInterface;
+use Monolog\Handler\StreamHandler;
+use Psr\Log\LoggerInterface;
+use Psr\Log\InvalidArgumentException;
+class Logger implements LoggerInterface
+{
+const DEBUG = 100;
+const INFO = 200;
+const NOTICE = 250;
+const WARNING = 300;
+const ERROR = 400;
+const CRITICAL = 500;
+const ALERT = 550;
+const EMERGENCY = 600;
+const API = 1;
+protected static $levels = array(
+self::DEBUG =>'DEBUG',
+self::INFO =>'INFO',
+self::NOTICE =>'NOTICE',
+self::WARNING =>'WARNING',
+self::ERROR =>'ERROR',
+self::CRITICAL =>'CRITICAL',
+self::ALERT =>'ALERT',
+self::EMERGENCY =>'EMERGENCY',
+);
+protected static $timezone;
+protected $name;
+protected $handlers;
+protected $processors;
+protected $microsecondTimestamps = true;
+public function __construct($name, array $handlers = array(), array $processors = array())
+{
+$this->name = $name;
+$this->handlers = $handlers;
+$this->processors = $processors;
+}
+public function getName()
+{
+return $this->name;
+}
+public function withName($name)
+{
+$new = clone $this;
+$new->name = $name;
+return $new;
+}
+public function pushHandler(HandlerInterface $handler)
+{
+array_unshift($this->handlers, $handler);
+return $this;
+}
+public function popHandler()
+{
+if (!$this->handlers) {
+throw new \LogicException('You tried to pop from an empty handler stack.');
+}
+return array_shift($this->handlers);
+}
+public function setHandlers(array $handlers)
+{
+$this->handlers = array();
+foreach (array_reverse($handlers) as $handler) {
+$this->pushHandler($handler);
+}
+return $this;
+}
+public function getHandlers()
+{
+return $this->handlers;
+}
+public function pushProcessor($callback)
+{
+if (!is_callable($callback)) {
+throw new \InvalidArgumentException('Processors must be valid callables (callback or object with an __invoke method), '.var_export($callback, true).' given');
+}
+array_unshift($this->processors, $callback);
+return $this;
+}
+public function popProcessor()
+{
+if (!$this->processors) {
+throw new \LogicException('You tried to pop from an empty processor stack.');
+}
+return array_shift($this->processors);
+}
+public function getProcessors()
+{
+return $this->processors;
+}
+public function useMicrosecondTimestamps($micro)
+{
+$this->microsecondTimestamps = (bool) $micro;
+}
+public function addRecord($level, $message, array $context = array())
+{
+if (!$this->handlers) {
+$this->pushHandler(new StreamHandler('php://stderr', static::DEBUG));
+}
+$levelName = static::getLevelName($level);
+$handlerKey = null;
+reset($this->handlers);
+while ($handler = current($this->handlers)) {
+if ($handler->isHandling(array('level'=> $level))) {
+$handlerKey = key($this->handlers);
+break;
+}
+next($this->handlers);
+}
+if (null === $handlerKey) {
+return false;
+}
+if (!static::$timezone) {
+static::$timezone = new \DateTimeZone(date_default_timezone_get() ?:'UTC');
+}
+if ($this->microsecondTimestamps && PHP_VERSION_ID < 70100) {
+$ts = \DateTime::createFromFormat('U.u', sprintf('%.6F', microtime(true)), static::$timezone);
+} else {
+$ts = new \DateTime(null, static::$timezone);
+}
+$ts->setTimezone(static::$timezone);
+$record = array('message'=> (string) $message,'context'=> $context,'level'=> $level,'level_name'=> $levelName,'channel'=> $this->name,'datetime'=> $ts,'extra'=> array(),
+);
+foreach ($this->processors as $processor) {
+$record = call_user_func($processor, $record);
+}
+while ($handler = current($this->handlers)) {
+if (true === $handler->handle($record)) {
+break;
+}
+next($this->handlers);
+}
+return true;
+}
+public function addDebug($message, array $context = array())
+{
+return $this->addRecord(static::DEBUG, $message, $context);
+}
+public function addInfo($message, array $context = array())
+{
+return $this->addRecord(static::INFO, $message, $context);
+}
+public function addNotice($message, array $context = array())
+{
+return $this->addRecord(static::NOTICE, $message, $context);
+}
+public function addWarning($message, array $context = array())
+{
+return $this->addRecord(static::WARNING, $message, $context);
+}
+public function addError($message, array $context = array())
+{
+return $this->addRecord(static::ERROR, $message, $context);
+}
+public function addCritical($message, array $context = array())
+{
+return $this->addRecord(static::CRITICAL, $message, $context);
+}
+public function addAlert($message, array $context = array())
+{
+return $this->addRecord(static::ALERT, $message, $context);
+}
+public function addEmergency($message, array $context = array())
+{
+return $this->addRecord(static::EMERGENCY, $message, $context);
+}
+public static function getLevels()
+{
+return array_flip(static::$levels);
+}
+public static function getLevelName($level)
+{
+if (!isset(static::$levels[$level])) {
+throw new InvalidArgumentException('Level "'.$level.'" is not defined, use one of: '.implode(', ', array_keys(static::$levels)));
+}
+return static::$levels[$level];
+}
+public static function toMonologLevel($level)
+{
+if (is_string($level) && defined(__CLASS__.'::'.strtoupper($level))) {
+return constant(__CLASS__.'::'.strtoupper($level));
+}
+return $level;
+}
+public function isHandling($level)
+{
+$record = array('level'=> $level,
+);
+foreach ($this->handlers as $handler) {
+if ($handler->isHandling($record)) {
+return true;
+}
+}
+return false;
+}
+public function log($level, $message, array $context = array())
+{
+$level = static::toMonologLevel($level);
+return $this->addRecord($level, $message, $context);
+}
+public function debug($message, array $context = array())
+{
+return $this->addRecord(static::DEBUG, $message, $context);
+}
+public function info($message, array $context = array())
+{
+return $this->addRecord(static::INFO, $message, $context);
+}
+public function notice($message, array $context = array())
+{
+return $this->addRecord(static::NOTICE, $message, $context);
+}
+public function warn($message, array $context = array())
+{
+return $this->addRecord(static::WARNING, $message, $context);
+}
+public function warning($message, array $context = array())
+{
+return $this->addRecord(static::WARNING, $message, $context);
+}
+public function err($message, array $context = array())
+{
+return $this->addRecord(static::ERROR, $message, $context);
+}
+public function error($message, array $context = array())
+{
+return $this->addRecord(static::ERROR, $message, $context);
+}
+public function crit($message, array $context = array())
+{
+return $this->addRecord(static::CRITICAL, $message, $context);
+}
+public function critical($message, array $context = array())
+{
+return $this->addRecord(static::CRITICAL, $message, $context);
+}
+public function alert($message, array $context = array())
+{
+return $this->addRecord(static::ALERT, $message, $context);
+}
+public function emerg($message, array $context = array())
+{
+return $this->addRecord(static::EMERGENCY, $message, $context);
+}
+public function emergency($message, array $context = array())
+{
+return $this->addRecord(static::EMERGENCY, $message, $context);
+}
+public static function setTimezone(\DateTimeZone $tz)
+{
+self::$timezone = $tz;
+}
+}
+}
+namespace Symfony\Component\HttpKernel\Log
+{
+use Psr\Log\LoggerInterface as PsrLogger;
+interface LoggerInterface extends PsrLogger
+{
+public function emerg($message, array $context = array());
+public function crit($message, array $context = array());
+public function err($message, array $context = array());
+public function warn($message, array $context = array());
+}
+}
+namespace Symfony\Component\HttpKernel\Log
+{
+interface DebugLoggerInterface
+{
+public function getLogs();
+public function countErrors();
+}
+}
+namespace Symfony\Bridge\Monolog
+{
+use Monolog\Logger as BaseLogger;
+use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
+class Logger extends BaseLogger implements LoggerInterface, DebugLoggerInterface
+{
+public function emerg($message, array $context = array())
+{
+@trigger_error('The '.__METHOD__.' method inherited from the Symfony\Component\HttpKernel\Log\LoggerInterface interface is deprecated since Symfony 2.2 and will be removed in 3.0. Use the emergency() method instead, which is PSR-3 compatible.', E_USER_DEPRECATED);
+return parent::addRecord(BaseLogger::EMERGENCY, $message, $context);
+}
+public function crit($message, array $context = array())
+{
+@trigger_error('The '.__METHOD__.' method inherited from the Symfony\Component\HttpKernel\Log\LoggerInterface interface is deprecated since Symfony 2.2 and will be removed in 3.0. Use the method critical() method instead, which is PSR-3 compatible.', E_USER_DEPRECATED);
+return parent::addRecord(BaseLogger::CRITICAL, $message, $context);
+}
+public function err($message, array $context = array())
+{
+@trigger_error('The '.__METHOD__.' method inherited from the Symfony\Component\HttpKernel\Log\LoggerInterface interface is deprecated since Symfony 2.2 and will be removed in 3.0. Use the error() method instead, which is PSR-3 compatible.', E_USER_DEPRECATED);
+return parent::addRecord(BaseLogger::ERROR, $message, $context);
+}
+public function warn($message, array $context = array())
+{
+@trigger_error('The '.__METHOD__.' method inherited from the Symfony\Component\HttpKernel\Log\LoggerInterface interface is deprecated since Symfony 2.2 and will be removed in 3.0. Use the warning() method instead, which is PSR-3 compatible.', E_USER_DEPRECATED);
+return parent::addRecord(BaseLogger::WARNING, $message, $context);
+}
+public function getLogs()
+{
+if ($logger = $this->getDebugLogger()) {
+return $logger->getLogs();
+}
+return array();
+}
+public function countErrors()
+{
+if ($logger = $this->getDebugLogger()) {
+return $logger->countErrors();
+}
+return 0;
+}
+private function getDebugLogger()
+{
+foreach ($this->handlers as $handler) {
+if ($handler instanceof DebugLoggerInterface) {
+return $handler;
+}
+}
+}
+}
+}
+namespace Monolog\Handler\FingersCrossed
+{
+interface ActivationStrategyInterface
+{
+public function isHandlerActivated(array $record);
+}
+}
+namespace Monolog\Handler\FingersCrossed
+{
+use Monolog\Logger;
+class ErrorLevelActivationStrategy implements ActivationStrategyInterface
+{
+private $actionLevel;
+public function __construct($actionLevel)
+{
+$this->actionLevel = Logger::toMonologLevel($actionLevel);
+}
+public function isHandlerActivated(array $record)
+{
+return $record['level'] >= $this->actionLevel;
+}
+}
+}
+namespace Sensio\Bundle\FrameworkExtraBundle\EventListener
+{
+use Doctrine\Common\Annotations\Reader;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
+use Doctrine\Common\Util\ClassUtils;
+class ControllerListener implements EventSubscriberInterface
+{
+protected $reader;
+public function __construct(Reader $reader)
+{
+$this->reader = $reader;
+}
+public function onKernelController(FilterControllerEvent $event)
+{
+$controller = $event->getController();
+if (!is_array($controller) && method_exists($controller,'__invoke')) {
+$controller = array($controller,'__invoke');
+}
+if (!is_array($controller)) {
+return;
+}
+$className = class_exists('Doctrine\Common\Util\ClassUtils') ? ClassUtils::getClass($controller[0]) : get_class($controller[0]);
+$object = new \ReflectionClass($className);
+$method = $object->getMethod($controller[1]);
+$classConfigurations = $this->getConfigurations($this->reader->getClassAnnotations($object));
+$methodConfigurations = $this->getConfigurations($this->reader->getMethodAnnotations($method));
+$configurations = array();
+foreach (array_merge(array_keys($classConfigurations), array_keys($methodConfigurations)) as $key) {
+if (!array_key_exists($key, $classConfigurations)) {
+$configurations[$key] = $methodConfigurations[$key];
+} elseif (!array_key_exists($key, $methodConfigurations)) {
+$configurations[$key] = $classConfigurations[$key];
+} else {
+if (is_array($classConfigurations[$key])) {
+if (!is_array($methodConfigurations[$key])) {
+throw new \UnexpectedValueException('Configurations should both be an array or both not be an array');
+}
+$configurations[$key] = array_merge($classConfigurations[$key], $methodConfigurations[$key]);
+} else {
+$configurations[$key] = $methodConfigurations[$key];
+}
+}
+}
+$request = $event->getRequest();
+foreach ($configurations as $key => $attributes) {
+$request->attributes->set($key, $attributes);
+}
+}
+protected function getConfigurations(array $annotations)
+{
+$configurations = array();
+foreach ($annotations as $configuration) {
+if ($configuration instanceof ConfigurationInterface) {
+if ($configuration->allowArray()) {
+$configurations['_'.$configuration->getAliasName()][] = $configuration;
+} elseif (!isset($configurations['_'.$configuration->getAliasName()])) {
+$configurations['_'.$configuration->getAliasName()] = $configuration;
+} else {
+throw new \LogicException(sprintf('Multiple "%s" annotations are not allowed.', $configuration->getAliasName()));
+}
+}
+}
+return $configurations;
+}
+public static function getSubscribedEvents()
+{
+return array(
+KernelEvents::CONTROLLER =>'onKernelController',
+);
+}
+}
+}
+namespace Sensio\Bundle\FrameworkExtraBundle\EventListener
+{
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterManager;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+class ParamConverterListener implements EventSubscriberInterface
+{
+protected $manager;
+protected $autoConvert;
+private $isParameterTypeSupported;
+public function __construct(ParamConverterManager $manager, $autoConvert = true)
+{
+$this->manager = $manager;
+$this->autoConvert = $autoConvert;
+$this->isParameterTypeSupported = method_exists('ReflectionParameter','getType');
+}
+public function onKernelController(FilterControllerEvent $event)
+{
+$controller = $event->getController();
+$request = $event->getRequest();
+$configurations = array();
+if ($configuration = $request->attributes->get('_converters')) {
+foreach (is_array($configuration) ? $configuration : array($configuration) as $configuration) {
+$configurations[$configuration->getName()] = $configuration;
+}
+}
+if (is_array($controller)) {
+$r = new \ReflectionMethod($controller[0], $controller[1]);
+} elseif (is_object($controller) && is_callable($controller,'__invoke')) {
+$r = new \ReflectionMethod($controller,'__invoke');
+} else {
+$r = new \ReflectionFunction($controller);
+}
+if ($this->autoConvert) {
+$configurations = $this->autoConfigure($r, $request, $configurations);
+}
+$this->manager->apply($request, $configurations);
+}
+private function autoConfigure(\ReflectionFunctionAbstract $r, Request $request, $configurations)
+{
+foreach ($r->getParameters() as $param) {
+if ($param->getClass() && $param->getClass()->isInstance($request)) {
+continue;
+}
+$name = $param->getName();
+$class = $param->getClass();
+$hasType = $this->isParameterTypeSupported && $param->hasType();
+if ($class || $hasType) {
+if (!isset($configurations[$name])) {
+$configuration = new ParamConverter(array());
+$configuration->setName($name);
+$configurations[$name] = $configuration;
+}
+if ($class && null === $configurations[$name]->getClass()) {
+$configurations[$name]->setClass($class->getName());
+}
+}
+if (isset($configurations[$name])) {
+$configurations[$name]->setIsOptional($param->isOptional() || $param->isDefaultValueAvailable() || $hasType && $param->getType()->allowsNull());
+}
+}
+return $configurations;
+}
+public static function getSubscribedEvents()
+{
+return array(
+KernelEvents::CONTROLLER =>'onKernelController',
+);
+}
+}
+}
+namespace Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter
+{
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
+interface ParamConverterInterface
+{
+public function apply(Request $request, ParamConverter $configuration);
+public function supports(ParamConverter $configuration);
+}
+}
+namespace Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter
+{
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use DateTime;
+class DateTimeParamConverter implements ParamConverterInterface
+{
+public function apply(Request $request, ParamConverter $configuration)
+{
+$param = $configuration->getName();
+if (!$request->attributes->has($param)) {
+return false;
+}
+$options = $configuration->getOptions();
+$value = $request->attributes->get($param);
+if (!$value && $configuration->isOptional()) {
+return false;
+}
+if (isset($options['format'])) {
+$date = DateTime::createFromFormat($options['format'], $value);
+if (!$date) {
+throw new NotFoundHttpException(sprintf('Invalid date given for parameter "%s".', $param));
+}
+} else {
+if (false === strtotime($value)) {
+throw new NotFoundHttpException(sprintf('Invalid date given for parameter "%s".', $param));
+}
+$date = new DateTime($value);
+}
+$request->attributes->set($param, $date);
+return true;
+}
+public function supports(ParamConverter $configuration)
+{
+if (null === $configuration->getClass()) {
+return false;
+}
+return'DateTime'=== $configuration->getClass();
+}
+}
+}
+namespace Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter
+{
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NoResultException;
+class DoctrineParamConverter implements ParamConverterInterface
+{
+protected $registry;
+public function __construct(ManagerRegistry $registry = null)
+{
+$this->registry = $registry;
+}
+public function apply(Request $request, ParamConverter $configuration)
+{
+$name = $configuration->getName();
+$class = $configuration->getClass();
+$options = $this->getOptions($configuration);
+if (null === $request->attributes->get($name, false)) {
+$configuration->setIsOptional(true);
+}
+if (false === $object = $this->find($class, $request, $options, $name)) {
+if (false === $object = $this->findOneBy($class, $request, $options)) {
+if ($configuration->isOptional()) {
+$object = null;
+} else {
+throw new \LogicException(sprintf('Unable to guess how to get a Doctrine instance from the request information for parameter "%s".', $name));
+}
+}
+}
+if (null === $object && false === $configuration->isOptional()) {
+throw new NotFoundHttpException(sprintf('%s object not found.', $class));
+}
+$request->attributes->set($name, $object);
+return true;
+}
+protected function find($class, Request $request, $options, $name)
+{
+if ($options['mapping'] || $options['exclude']) {
+return false;
+}
+$id = $this->getIdentifier($request, $options, $name);
+if (false === $id || null === $id) {
+return false;
+}
+if (isset($options['repository_method'])) {
+$method = $options['repository_method'];
+} else {
+$method ='find';
+}
+try {
+return $this->getManager($options['entity_manager'], $class)->getRepository($class)->$method($id);
+} catch (NoResultException $e) {
+return;
+}
+}
+protected function getIdentifier(Request $request, $options, $name)
+{
+if (isset($options['id'])) {
+if (!is_array($options['id'])) {
+$name = $options['id'];
+} elseif (is_array($options['id'])) {
+$id = array();
+foreach ($options['id'] as $field) {
+$id[$field] = $request->attributes->get($field);
+}
+return $id;
+}
+}
+if ($request->attributes->has($name)) {
+return $request->attributes->get($name);
+}
+if ($request->attributes->has('id') && !isset($options['id'])) {
+return $request->attributes->get('id');
+}
+return false;
+}
+protected function findOneBy($class, Request $request, $options)
+{
+if (!$options['mapping']) {
+$keys = $request->attributes->keys();
+$options['mapping'] = $keys ? array_combine($keys, $keys) : array();
+}
+foreach ($options['exclude'] as $exclude) {
+unset($options['mapping'][$exclude]);
+}
+if (!$options['mapping']) {
+return false;
+}
+if (isset($options['id']) && null === $request->attributes->get($options['id'])) {
+return false;
+}
+$criteria = array();
+$em = $this->getManager($options['entity_manager'], $class);
+$metadata = $em->getClassMetadata($class);
+$mapMethodSignature = isset($options['repository_method'])
+&& isset($options['map_method_signature'])
+&& $options['map_method_signature'] === true;
+foreach ($options['mapping'] as $attribute => $field) {
+if ($metadata->hasField($field)
+|| ($metadata->hasAssociation($field) && $metadata->isSingleValuedAssociation($field))
+|| $mapMethodSignature) {
+$criteria[$field] = $request->attributes->get($attribute);
+}
+}
+if ($options['strip_null']) {
+$criteria = array_filter($criteria, function ($value) { return !is_null($value); });
+}
+if (!$criteria) {
+return false;
+}
+if (isset($options['repository_method'])) {
+$repositoryMethod = $options['repository_method'];
+} else {
+$repositoryMethod ='findOneBy';
+}
+try {
+if ($mapMethodSignature) {
+return $this->findDataByMapMethodSignature($em, $class, $repositoryMethod, $criteria);
+}
+return $em->getRepository($class)->$repositoryMethod($criteria);
+} catch (NoResultException $e) {
+return;
+}
+}
+private function findDataByMapMethodSignature($em, $class, $repositoryMethod, $criteria)
+{
+$arguments = array();
+$repository = $em->getRepository($class);
+$ref = new \ReflectionMethod($repository, $repositoryMethod);
+foreach ($ref->getParameters() as $parameter) {
+if (array_key_exists($parameter->name, $criteria)) {
+$arguments[] = $criteria[$parameter->name];
+} elseif ($parameter->isDefaultValueAvailable()) {
+$arguments[] = $parameter->getDefaultValue();
+} else {
+throw new \InvalidArgumentException(sprintf('Repository method "%s::%s" requires that you provide a value for the "$%s" argument.', get_class($repository), $repositoryMethod, $parameter->name));
+}
+}
+return $ref->invokeArgs($repository, $arguments);
+}
+public function supports(ParamConverter $configuration)
+{
+if (null === $this->registry || !count($this->registry->getManagers())) {
+return false;
+}
+if (null === $configuration->getClass()) {
+return false;
+}
+$options = $this->getOptions($configuration);
+$em = $this->getManager($options['entity_manager'], $configuration->getClass());
+if (null === $em) {
+return false;
+}
+return !$em->getMetadataFactory()->isTransient($configuration->getClass());
+}
+protected function getOptions(ParamConverter $configuration)
+{
+return array_replace(array('entity_manager'=> null,'exclude'=> array(),'mapping'=> array(),'strip_null'=> false,
+), $configuration->getOptions());
+}
+private function getManager($name, $class)
+{
+if (null === $name) {
+return $this->registry->getManagerForClass($class);
+}
+return $this->registry->getManager($name);
+}
+}
+}
+namespace Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter
+{
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
+class ParamConverterManager
+{
+protected $converters = array();
+protected $namedConverters = array();
+public function apply(Request $request, $configurations)
+{
+if (is_object($configurations)) {
+$configurations = array($configurations);
+}
+foreach ($configurations as $configuration) {
+$this->applyConverter($request, $configuration);
+}
+}
+protected function applyConverter(Request $request, ConfigurationInterface $configuration)
+{
+$value = $request->attributes->get($configuration->getName());
+$className = $configuration->getClass();
+if (is_object($value) && $value instanceof $className) {
+return;
+}
+if ($converterName = $configuration->getConverter()) {
+if (!isset($this->namedConverters[$converterName])) {
+throw new \RuntimeException(sprintf("No converter named '%s' found for conversion of parameter '%s'.",
+$converterName, $configuration->getName()
+));
+}
+$converter = $this->namedConverters[$converterName];
+if (!$converter->supports($configuration)) {
+throw new \RuntimeException(sprintf("Converter '%s' does not support conversion of parameter '%s'.",
+$converterName, $configuration->getName()
+));
+}
+$converter->apply($request, $configuration);
+return;
+}
+foreach ($this->all() as $converter) {
+if ($converter->supports($configuration)) {
+if ($converter->apply($request, $configuration)) {
+return;
+}
+}
+}
+}
+public function add(ParamConverterInterface $converter, $priority = 0, $name = null)
+{
+if ($priority !== null) {
+if (!isset($this->converters[$priority])) {
+$this->converters[$priority] = array();
+}
+$this->converters[$priority][] = $converter;
+}
+if (null !== $name) {
+$this->namedConverters[$name] = $converter;
+}
+}
+public function all()
+{
+krsort($this->converters);
+$converters = array();
+foreach ($this->converters as $all) {
+$converters = array_merge($converters, $all);
+}
+return $converters;
+}
+}
+}
+namespace Sensio\Bundle\FrameworkExtraBundle\EventListener
+{
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+class TemplateListener implements EventSubscriberInterface
+{
+protected $container;
+public function __construct(ContainerInterface $container)
+{
+$this->container = $container;
+}
+public function onKernelController(FilterControllerEvent $event)
+{
+$request = $event->getRequest();
+$template = $request->attributes->get('_template');
+if (!$template instanceof Template) {
+return;
+}
+$template->setOwner($controller = $event->getController());
+if (null === $template->getTemplate()) {
+$guesser = $this->container->get('sensio_framework_extra.view.guesser');
+$template->setTemplate($guesser->guessTemplateName($controller, $request, $template->getEngine()));
+}
+}
+public function onKernelView(GetResponseForControllerResultEvent $event)
+{
+$request = $event->getRequest();
+$template = $request->attributes->get('_template');
+if (!$template instanceof Template) {
+return;
+}
+$parameters = $event->getControllerResult();
+$owner = $template->getOwner();
+list($controller, $action) = $owner;
+if (null === $parameters) {
+$parameters = $this->resolveDefaultParameters($request, $template, $controller, $action);
+}
+$templating = $this->container->get('templating');
+if ($template->isStreamable()) {
+$callback = function () use ($templating, $template, $parameters) {
+return $templating->stream($template->getTemplate(), $parameters);
+};
+$event->setResponse(new StreamedResponse($callback));
+} else {
+$event->setResponse($templating->renderResponse($template->getTemplate(), $parameters));
+}
+$template->setOwner(array());
+}
+public static function getSubscribedEvents()
+{
+return array(
+KernelEvents::CONTROLLER => array('onKernelController', -128),
+KernelEvents::VIEW =>'onKernelView',
+);
+}
+private function resolveDefaultParameters(Request $request, Template $template, $controller, $action)
+{
+$parameters = array();
+$arguments = $template->getVars();
+if (0 === count($arguments)) {
+$r = new \ReflectionObject($controller);
+$arguments = array();
+foreach ($r->getMethod($action)->getParameters() as $param) {
+$arguments[] = $param;
+}
+}
+foreach ($arguments as $argument) {
+if ($argument instanceof \ReflectionParameter) {
+$parameters[$name = $argument->getName()] = !$request->attributes->has($name) && $argument->isDefaultValueAvailable() ? $argument->getDefaultValue() : $request->attributes->get($name);
+} else {
+$parameters[$argument] = $request->attributes->get($argument);
+}
+}
+return $parameters;
+}
+}
+}
+namespace Sensio\Bundle\FrameworkExtraBundle\EventListener
+{
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+class HttpCacheListener implements EventSubscriberInterface
+{
+private $lastModifiedDates;
+private $etags;
+private $expressionLanguage;
+public function __construct()
+{
+$this->lastModifiedDates = new \SplObjectStorage();
+$this->etags = new \SplObjectStorage();
+}
+public function onKernelController(FilterControllerEvent $event)
+{
+$request = $event->getRequest();
+if (!$configuration = $request->attributes->get('_cache')) {
+return;
+}
+$response = new Response();
+$lastModifiedDate ='';
+if ($configuration->getLastModified()) {
+$lastModifiedDate = $this->getExpressionLanguage()->evaluate($configuration->getLastModified(), $request->attributes->all());
+$response->setLastModified($lastModifiedDate);
+}
+$etag ='';
+if ($configuration->getETag()) {
+$etag = hash('sha256', $this->getExpressionLanguage()->evaluate($configuration->getETag(), $request->attributes->all()));
+$response->setETag($etag);
+}
+if ($response->isNotModified($request)) {
+$event->setController(function () use ($response) {
+return $response;
+});
+$event->stopPropagation();
+} else {
+if ($etag) {
+$this->etags[$request] = $etag;
+}
+if ($lastModifiedDate) {
+$this->lastModifiedDates[$request] = $lastModifiedDate;
+}
+}
+}
+public function onKernelResponse(FilterResponseEvent $event)
+{
+$request = $event->getRequest();
+if (!$configuration = $request->attributes->get('_cache')) {
+return;
+}
+$response = $event->getResponse();
+if (!in_array($response->getStatusCode(), array(200, 203, 300, 301, 302, 304, 404, 410))) {
+return;
+}
+if (null !== $age = $configuration->getSMaxAge()) {
+if (!is_numeric($age)) {
+$now = microtime(true);
+$age = ceil(strtotime($configuration->getSMaxAge(), $now) - $now);
+}
+$response->setSharedMaxAge($age);
+}
+if (null !== $age = $configuration->getMaxAge()) {
+if (!is_numeric($age)) {
+$now = microtime(true);
+$age = ceil(strtotime($configuration->getMaxAge(), $now) - $now);
+}
+$response->setMaxAge($age);
+}
+if (null !== $configuration->getExpires()) {
+$date = \DateTime::createFromFormat('U', strtotime($configuration->getExpires()), new \DateTimeZone('UTC'));
+$response->setExpires($date);
+}
+if (null !== $configuration->getVary()) {
+$response->setVary($configuration->getVary());
+}
+if ($configuration->isPublic()) {
+$response->setPublic();
+}
+if ($configuration->isPrivate()) {
+$response->setPrivate();
+}
+if (isset($this->lastModifiedDates[$request])) {
+$response->setLastModified($this->lastModifiedDates[$request]);
+unset($this->lastModifiedDates[$request]);
+}
+if (isset($this->etags[$request])) {
+$response->setETag($this->etags[$request]);
+unset($this->etags[$request]);
+}
+}
+public static function getSubscribedEvents()
+{
+return array(
+KernelEvents::CONTROLLER =>'onKernelController',
+KernelEvents::RESPONSE =>'onKernelResponse',
+);
+}
+private function getExpressionLanguage()
+{
+if (null === $this->expressionLanguage) {
+if (!class_exists('Symfony\Component\ExpressionLanguage\ExpressionLanguage')) {
+throw new \RuntimeException('Unable to use expressions as the Symfony ExpressionLanguage component is not installed.');
+}
+$this->expressionLanguage = new ExpressionLanguage();
+}
+return $this->expressionLanguage;
+}
+}
+}
+namespace Sensio\Bundle\FrameworkExtraBundle\EventListener
+{
+use Sensio\Bundle\FrameworkExtraBundle\Security\ExpressionLanguage;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
+class SecurityListener implements EventSubscriberInterface
+{
+private $tokenStorage;
+private $authChecker;
+private $language;
+private $trustResolver;
+private $roleHierarchy;
+public function __construct(SecurityContextInterface $securityContext = null, ExpressionLanguage $language = null, AuthenticationTrustResolverInterface $trustResolver = null, RoleHierarchyInterface $roleHierarchy = null, TokenStorageInterface $tokenStorage = null, AuthorizationCheckerInterface $authChecker = null)
+{
+$this->tokenStorage = $tokenStorage ?: $securityContext;
+$this->authChecker = $authChecker ?: $securityContext;
+$this->language = $language;
+$this->trustResolver = $trustResolver;
+$this->roleHierarchy = $roleHierarchy;
+}
+public function onKernelController(FilterControllerEvent $event)
+{
+$request = $event->getRequest();
+if (!$configuration = $request->attributes->get('_security')) {
+return;
+}
+if (null === $this->tokenStorage || null === $this->trustResolver) {
+throw new \LogicException('To use the @Security tag, you need to install the Symfony Security bundle.');
+}
+if (null === $this->tokenStorage->getToken()) {
+throw new \LogicException('To use the @Security tag, your controller needs to be behind a firewall.');
+}
+if (null === $this->language) {
+throw new \LogicException('To use the @Security tag, you need to use the Security component 2.4 or newer and install the ExpressionLanguage component.');
+}
+if (!$this->language->evaluate($configuration->getExpression(), $this->getVariables($request))) {
+throw new AccessDeniedException(sprintf('Expression "%s" denied access.', $configuration->getExpression()));
+}
+}
+private function getVariables(Request $request)
+{
+$token = $this->tokenStorage->getToken();
+if (null !== $this->roleHierarchy) {
+$roles = $this->roleHierarchy->getReachableRoles($token->getRoles());
+} else {
+$roles = $token->getRoles();
+}
+$variables = array('token'=> $token,'user'=> $token->getUser(),'object'=> $request,'subject'=> $request,'request'=> $request,'roles'=> array_map(function ($role) { return $role->getRole(); }, $roles),'trust_resolver'=> $this->trustResolver,'auth_checker'=> $this->authChecker,
+);
+return array_merge($request->attributes->all(), $variables);
+}
+public static function getSubscribedEvents()
+{
+return array(KernelEvents::CONTROLLER =>'onKernelController');
+}
+}
+}
+namespace Sensio\Bundle\FrameworkExtraBundle\Configuration
+{
+interface ConfigurationInterface
+{
+public function getAliasName();
+public function allowArray();
+}
+}
+namespace Sensio\Bundle\FrameworkExtraBundle\Configuration
+{
+abstract class ConfigurationAnnotation implements ConfigurationInterface
+{
+public function __construct(array $values)
+{
+foreach ($values as $k => $v) {
+if (!method_exists($this, $name ='set'.$k)) {
+throw new \RuntimeException(sprintf('Unknown key "%s" for annotation "@%s".', $k, get_class($this)));
+}
+$this->$name($v);
+}
+}
+}
+}

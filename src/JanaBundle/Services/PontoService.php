@@ -131,4 +131,52 @@ class PontoService
         }
         return $ponto;
     }
+
+    public function relatorioMes($mes, $ano){
+        if(empty($mes) || $mes == null){
+            return ['error' => true, 'message' => utf8_encode('Month can\'t be null')];
+        }
+
+        if(empty($ano) || $ano == null){
+            return ['error' => true, 'message' => utf8_encode('Year can\'t be null')];
+        }
+
+        $data_ini = \DateTime::createFromFormat('Y-m-d H:i:s', $ano. '-'. $mes.'-01 00:00:00');
+        $data_fim = \DateTime::createFromFormat('Y-m-d H:i:s', $ano.'-'.$mes.'-'.cal_days_in_month(CAL_GREGORIAN, $mes, $ano).' 23:59:59');
+
+        if(!$data_ini || !$data_fim){
+            return ['error' => true, 'message' => utf8_encode('Parsing Date Error')];
+        }
+
+        $pontos = $this->entityManager->getRepository('JanaBundle:Ponto')->findAllByDay($data_ini, $data_fim);
+        $retorno = [];
+
+        $dia = $pontos[0]->getDtHrPonto()->format('Y-m-d');
+        foreach ($pontos as $ponto) {
+            if($dia != $ponto->getDtHrPonto()->format('Y-m-d')){
+                $retorno[$dia]['total_trabalhadas'] = $this->calculaTotalDia($dia, $retorno[$dia]);
+                $dia = $ponto->getDtHrPonto()->format('Y-m-d');
+            }
+
+            $retorno[$dia][$ponto->getTpPonto()->getDescricao()] = $ponto->getDtHrPonto()->format('H:i:s');
+        }
+        $retorno[$dia]['total_trabalhadas'] = $this->calculaTotalDia($dia, $retorno[$dia]);
+        var_dump($retorno);
+        return $retorno;
+    }
+
+    public function calculaTotalDia($dia, $pontosDia){
+        $retorno = array();
+        $horas_necessarias = '08:00:00';
+
+        if(date('w', strtotime($dia)) == 0 || date('w', strtotime($dia)) == 6){
+            $horas_necessarias = '00:00:00';
+        }
+
+        $entrada_almoco = \DateTime::createFromFormat('H:i:s', $pontosDia['ALMOCO_IN'])->diff(\DateTime::createFromFormat('H:i:s', $pontosDia['ENTRADA']));
+        $entrada_almoco = \DateTime::createFromFormat('H:i:s', $pontosDia['ALMOCO_OUT'])->diff(\DateTime::createFromFormat('H:i:s', $pontosDia['SAIDA']));
+
+        
+        return $pontosDia;
+    }
 }
