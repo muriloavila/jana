@@ -187,15 +187,15 @@ class PontoService
         if(!isset($pontosDia['SAIDA'])){
             $pontosDia['SAIDA'] = '00:00:00';
         }
-
         $entrada_almoco = \DateTime::createFromFormat('H:i:s', $pontosDia['ALMOCO_IN'])->diff(\DateTime::createFromFormat('H:i:s', $pontosDia['ENTRADA']));
         $almoco_saida = \DateTime::createFromFormat('H:i:s', $pontosDia['ALMOCO_OUT'])->diff(\DateTime::createFromFormat('H:i:s', $pontosDia['SAIDA']));
 
-        $horas_trab = \DateTime::createFromFormat('H:i:s', $entrada_almoco->format('%H:%i:%s'))->add($almoco_saida);
+
+        $horas_trab = \DateTime::createFromFormat('H:i:s', $entrada_almoco->format('%H:%I:%S'))->add($almoco_saida);
 
         $horas_necessarias = \DateTime::createFromFormat('H:i:s', $horas_necessarias);
 
-        $total_dia = $horas_necessarias->diff($horas_trab)->format('%r%H:%i:%s');
+        $total_dia = $horas_necessarias->diff($horas_trab)->format('%r%H:%I:%S');
 
         $retorno['horas_trabalhadas'] = $horas_trab->format('H:i:s');
         $retorno['horas_necessarias'] = $horas_necessarias->format('H:i:s');
