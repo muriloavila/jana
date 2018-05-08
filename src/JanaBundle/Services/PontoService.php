@@ -154,14 +154,13 @@ class PontoService
         $dia = $pontos[0]->getDtHrPonto()->format('Y-m-d');
         foreach ($pontos as $ponto) {
             if($dia != $ponto->getDtHrPonto()->format('Y-m-d')){
-                $retorno[$dia]['total_trabalhadas'] = $this->calculaTotalDia($dia, $retorno[$dia]);
+                $retorno[$dia]['total'] = $this->calculaTotalDia($dia, $retorno[$dia]);
                 $dia = $ponto->getDtHrPonto()->format('Y-m-d');
             }
 
             $retorno[$dia][$ponto->getTpPonto()->getDescricao()] = $ponto->getDtHrPonto()->format('H:i:s');
         }
         $retorno[$dia]['total_trabalhadas'] = $this->calculaTotalDia($dia, $retorno[$dia]);
-        var_dump($retorno);
         return $retorno;
     }
 
@@ -173,10 +172,35 @@ class PontoService
             $horas_necessarias = '00:00:00';
         }
 
-        $entrada_almoco = \DateTime::createFromFormat('H:i:s', $pontosDia['ALMOCO_IN'])->diff(\DateTime::createFromFormat('H:i:s', $pontosDia['ENTRADA']));
-        $entrada_almoco = \DateTime::createFromFormat('H:i:s', $pontosDia['ALMOCO_OUT'])->diff(\DateTime::createFromFormat('H:i:s', $pontosDia['SAIDA']));
+        if(!isset($pontosDia['ENTRADA'])){
+            $pontosDia['ENTRADA'] = '00:00:00';
+        }
 
-        
-        return $pontosDia;
+        if(!isset($pontosDia['ALMOCO_IN'])){
+            $pontosDia['ALMOCO_IN'] = '00:00:00';
+        }
+
+        if(!isset($pontosDia['ALMOCO_OUT'])){
+            $pontosDia['ALMOCO_OUT'] = '00:00:00';
+        }
+
+        if(!isset($pontosDia['SAIDA'])){
+            $pontosDia['SAIDA'] = '00:00:00';
+        }
+
+        $entrada_almoco = \DateTime::createFromFormat('H:i:s', $pontosDia['ALMOCO_IN'])->diff(\DateTime::createFromFormat('H:i:s', $pontosDia['ENTRADA']));
+        $almoco_saida = \DateTime::createFromFormat('H:i:s', $pontosDia['ALMOCO_OUT'])->diff(\DateTime::createFromFormat('H:i:s', $pontosDia['SAIDA']));
+
+        $horas_trab = \DateTime::createFromFormat('H:i:s', $entrada_almoco->format('%H:%i:%s'))->add($almoco_saida);
+
+        $horas_necessarias = \DateTime::createFromFormat('H:i:s', $horas_necessarias);
+
+        $total_dia = $horas_necessarias->diff($horas_trab)->format('%r%H:%i:%s');
+
+        $retorno['horas_trabalhadas'] = $horas_trab->format('H:i:s');
+        $retorno['horas_necessarias'] = $horas_necessarias->format('H:i:s');
+        $retorno['total_dia'] = $total_dia;
+
+        return $retorno;
     }
 }
