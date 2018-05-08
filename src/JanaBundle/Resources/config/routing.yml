@@ -24,6 +24,6 @@ jana_busca_ponto:
     methods: [GET]
 
 jana_relatorio_ponto:
-    path: /ponto/relatorio/{relatorio}
+    path: /relatorio/{relatorio}
     defaults: {_controller: JanaBundle:Relatorio:busca}
     methods: [GET]
