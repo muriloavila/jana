@@ -1,437 +1,298 @@
-# Logfile created on 2018-05-08 12:16:06 -0300 by logger.rb/56815
+# Logfile created on 2018-05-08 22:22:08 -0300 by logger.rb/v1.2.7
   INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 12:16:06 -0300 cap production deploy
+  INFO START 2018-05-08 22:22:08 -0300 cap pro deploy:check
   INFO ---------------------------------------------------------------------------
-  INFO [bb2a9281] Running /usr/bin/env mkdir -p /tmp as git@18.191.54.140
- DEBUG [bb2a9281] Command: /usr/bin/env mkdir -p /tmp
+  INFO [e25118fe] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
   INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 12:16:49 -0300 cap production deploy
+  INFO START 2018-05-08 22:22:52 -0300 cap pro deploy:check
   INFO ---------------------------------------------------------------------------
-  INFO [fbd35eeb] Running /usr/bin/env mkdir -p /tmp as conexao-jana@18.191.54.140
- DEBUG [fbd35eeb] Command: /usr/bin/env mkdir -p /tmp
-  INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 12:41:22 -0300 cap production deploy:check
-  INFO ---------------------------------------------------------------------------
-  INFO [1cbc996d] Running /usr/bin/env mkdir -p /tmp as conexao-jana@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [1cbc996d] Command: /usr/bin/env mkdir -p /tmp
-  INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 12:41:38 -0300 cap production deploy:check
-  INFO ---------------------------------------------------------------------------
-  INFO [c2341056] Running /usr/bin/env mkdir -p /tmp as conexao-jana@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [c2341056] Command: /usr/bin/env mkdir -p /tmp
-  INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 12:42:44 -0300 cap production deploy:check
-  INFO ---------------------------------------------------------------------------
-  INFO [95e0e14f] Running /usr/bin/env mkdir -p /tmp as conexao-jana@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [95e0e14f] Command: /usr/bin/env mkdir -p /tmp
-  INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 12:43:15 -0300 cap production deploy:check
-  INFO ---------------------------------------------------------------------------
-  INFO [1c518d1f] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [1c518d1f] Command: /usr/bin/env mkdir -p /tmp
-  INFO [1c518d1f] Finished in 2.236 seconds with exit status 0 (successful).
- DEBUG Uploading /tmp/git-ssh-jana-production-root.sh 0.0%
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [7a60db6e] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [7a60db6e] Command: /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh
-  INFO [7a60db6e] Finished in 0.612 seconds with exit status 0 (successful).
-  INFO [3b1bcf75] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [3b1bcf75] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-jana-production-root.sh" ; /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD )
- DEBUG [3b1bcf75] 	Warning: Permanently added 'github.com,192.30.253.113' (RSA) to the list of known hosts.
- DEBUG [3b1bcf75] 	Permission denied (publickey).
- DEBUG [3b1bcf75] 	fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-  INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 12:49:55 -0300 cap production deploy:check
-  INFO ---------------------------------------------------------------------------
-  INFO [6610b4f0] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [6610b4f0] Command: /usr/bin/env mkdir -p /tmp
-  INFO [6610b4f0] Finished in 2.253 seconds with exit status 0 (successful).
- DEBUG Uploading /tmp/git-ssh-jana-production-root.sh 0.0%
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [1eeced67] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [1eeced67] Command: /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh
-  INFO [1eeced67] Finished in 0.612 seconds with exit status 0 (successful).
-  INFO [dc3bee83] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [dc3bee83] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-jana-production-root.sh" ; /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD )
- DEBUG [dc3bee83] 	Warning: Permanently added the RSA host key for IP address '192.30.253.112' to the list of known hosts.
- DEBUG [dc3bee83] 	56b2b25aee08e0043b3efc16340d3adb27408497	HEAD
-  INFO [dc3bee83] Finished in 3.072 seconds with exit status 0 (successful).
-  INFO [84da7bcb] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [84da7bcb] Command: /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases
- DEBUG [84da7bcb] 	mkdir: 
- DEBUG [84da7bcb] 	cannot create directory ‘/var/www/jana/shared’
- DEBUG [84da7bcb] 	: Permission denied
- DEBUG [84da7bcb] 	
- DEBUG [84da7bcb] 	mkdir: 
- DEBUG [84da7bcb] 	cannot create directory ‘/var/www/jana/releases’
- DEBUG [84da7bcb] 	: Permission denied
- DEBUG [84da7bcb] 	
-  INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 12:50:43 -0300 cap production deploy:check
-  INFO ---------------------------------------------------------------------------
-  INFO [4cf805ec] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [4cf805ec] Command: /usr/bin/env mkdir -p /tmp
-  INFO [4cf805ec] Finished in 2.724 seconds with exit status 0 (successful).
- DEBUG Uploading /tmp/git-ssh-jana-production-root.sh 0.0%
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [d169726e] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [d169726e] Command: /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh
-  INFO [d169726e] Finished in 0.688 seconds with exit status 0 (successful).
-  INFO [f209700e] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [f209700e] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-jana-production-root.sh" ; /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD )
- DEBUG [f209700e] 	56b2b25aee08e0043b3efc16340d3adb27408497	HEAD
-  INFO [f209700e] Finished in 1.459 seconds with exit status 0 (successful).
-  INFO [0b7bd8df] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [0b7bd8df] Command: /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases
-  INFO [0b7bd8df] Finished in 0.717 seconds with exit status 0 (successful).
-  INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 12:51:25 -0300 cap production deploy
-  INFO ---------------------------------------------------------------------------
-  INFO [092b123e] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [092b123e] Command: /usr/bin/env mkdir -p /tmp
-  INFO [092b123e] Finished in 2.222 seconds with exit status 0 (successful).
- DEBUG Uploading /tmp/git-ssh-jana-production-root.sh 0.0%
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [4ff2fa88] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [4ff2fa88] Command: /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh
-  INFO [4ff2fa88] Finished in 0.631 seconds with exit status 0 (successful).
-  INFO [7b145a62] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [7b145a62] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-jana-production-root.sh" ; /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD )
- DEBUG [7b145a62] 	56b2b25aee08e0043b3efc16340d3adb27408497	HEAD
-  INFO [7b145a62] Finished in 1.307 seconds with exit status 0 (successful).
-  INFO [fb08cc8e] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [fb08cc8e] Command: /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases
-  INFO [fb08cc8e] Finished in 0.512 seconds with exit status 0 (successful).
- DEBUG [f344c084] Running [ -f /var/www/jana/current/REVISION ] as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [f344c084] Command: [ -f /var/www/jana/current/REVISION ]
- DEBUG [f344c084] Finished in 0.550 seconds with exit status 1 (failed).
- DEBUG [f7501d2f] Running [ -f /var/www/jana/repo/HEAD ] as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [f7501d2f] Command: [ -f /var/www/jana/repo/HEAD ]
- DEBUG [f7501d2f] Finished in 0.549 seconds with exit status 1 (failed).
- DEBUG [551ccd6a] Running if test ! -d /var/www/jana; then echo "Directory does not exist '/var/www/jana'" 1>&2; false; fi as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [551ccd6a] Command: if test ! -d /var/www/jana; then echo "Directory does not exist '/var/www/jana'" 1>&2; false; fi
- DEBUG [551ccd6a] Finished in 0.571 seconds with exit status 0 (successful).
-  INFO [b82b73f2] Running /usr/bin/env git clone --mirror git@github.com:muriloavila/jana.git /var/www/jana/repo as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [b82b73f2] Command: cd /var/www/jana && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-jana-production-root.sh" ; /usr/bin/env git clone --mirror git@github.com:muriloavila/jana.git /var/www/jana/repo )
- DEBUG [b82b73f2] 	Cloning into bare repository '/var/www/jana/repo'...
-  INFO [b82b73f2] Finished in 2.617 seconds with exit status 0 (successful).
- DEBUG [371543c4] Running if test ! -d /var/www/jana/repo; then echo "Directory does not exist '/var/www/jana/repo'" 1>&2; false; fi as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [371543c4] Command: if test ! -d /var/www/jana/repo; then echo "Directory does not exist '/var/www/jana/repo'" 1>&2; false; fi
- DEBUG [371543c4] Finished in 0.523 seconds with exit status 0 (successful).
-  INFO [db659b3b] Running /usr/bin/env git remote set-url origin git@github.com:muriloavila/jana.git as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [db659b3b] Command: cd /var/www/jana/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-jana-production-root.sh" ; /usr/bin/env git remote set-url origin git@github.com:muriloavila/jana.git )
-  INFO [db659b3b] Finished in 0.553 seconds with exit status 0 (successful).
-  INFO [e54798b2] Running /usr/bin/env git remote update --prune as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [e54798b2] Command: cd /var/www/jana/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-jana-production-root.sh" ; /usr/bin/env git remote update --prune )
- DEBUG [e54798b2] 	Fetching origin
-  INFO [e54798b2] Finished in 1.285 seconds with exit status 0 (successful).
- DEBUG [e79d7a12] Running if test ! -d /var/www/jana/repo; then echo "Directory does not exist '/var/www/jana/repo'" 1>&2; false; fi as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [e79d7a12] Command: if test ! -d /var/www/jana/repo; then echo "Directory does not exist '/var/www/jana/repo'" 1>&2; false; fi
- DEBUG [e79d7a12] Finished in 0.508 seconds with exit status 0 (successful).
-  INFO [9085fbfb] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180508155132 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [9085fbfb] Command: cd /var/www/jana/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-jana-production-root.sh" ; /usr/bin/env mkdir -p /var/www/jana/releases/20180508155132 )
-  INFO [9085fbfb] Finished in 0.561 seconds with exit status 0 (successful).
-  INFO [af8925ee] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/jana/releases/20180508155132 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [af8925ee] Command: cd /var/www/jana/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-jana-production-root.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/jana/releases/20180508155132 )
-  INFO [af8925ee] Finished in 1.233 seconds with exit status 0 (successful).
- DEBUG [7ca0ea65] Running if test ! -d /var/www/jana/repo; then echo "Directory does not exist '/var/www/jana/repo'" 1>&2; false; fi as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [7ca0ea65] Command: if test ! -d /var/www/jana/repo; then echo "Directory does not exist '/var/www/jana/repo'" 1>&2; false; fi
- DEBUG [7ca0ea65] Finished in 0.546 seconds with exit status 0 (successful).
- DEBUG [c7dbe0c1] Running /usr/bin/env git rev-list --max-count=1 master as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [c7dbe0c1] Command: cd /var/www/jana/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-jana-production-root.sh" ; /usr/bin/env git rev-list --max-count=1 master )
- DEBUG [c7dbe0c1] 	56b2b25aee08e0043b3efc16340d3adb27408497
- DEBUG [c7dbe0c1] Finished in 0.557 seconds with exit status 0 (successful).
- DEBUG [253d3937] Running if test ! -d /var/www/jana/releases/20180508155132; then echo "Directory does not exist '/var/www/jana/releases/20180508155132'" 1>&2; false; fi as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [253d3937] Command: if test ! -d /var/www/jana/releases/20180508155132; then echo "Directory does not exist '/var/www/jana/releases/20180508155132'" 1>&2; false; fi
- DEBUG [253d3937] Finished in 0.558 seconds with exit status 0 (successful).
-  INFO [eb3c8a20] Running /usr/bin/env echo "56b2b25aee08e0043b3efc16340d3adb27408497" > REVISION as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [eb3c8a20] Command: cd /var/www/jana/releases/20180508155132 && /usr/bin/env echo "56b2b25aee08e0043b3efc16340d3adb27408497" > REVISION
-  INFO [eb3c8a20] Finished in 0.576 seconds with exit status 0 (successful).
- DEBUG [b9246307] Running if test ! -d /var/www/jana/releases/20180508155132; then echo "Directory does not exist '/var/www/jana/releases/20180508155132'" 1>&2; false; fi as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [b9246307] Command: if test ! -d /var/www/jana/releases/20180508155132; then echo "Directory does not exist '/var/www/jana/releases/20180508155132'" 1>&2; false; fi
- DEBUG [b9246307] Finished in 0.672 seconds with exit status 0 (successful).
-  INFO [4c395668] Running /usr/bin/env composer install --no-dev --quiet as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [4c395668] Command: cd /var/www/jana/releases/20180508155132 && /usr/bin/env composer install --no-dev --quiet
- DEBUG [4c395668] 	/usr/bin/env: 
- DEBUG [4c395668] 	‘composer’
- DEBUG [4c395668] 	: No such file or directory
- DEBUG [4c395668] 	
-  INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 12:57:34 -0300 cap production deploy:publishing
-  INFO ---------------------------------------------------------------------------
-  INFO [3ef2b012] Running /usr/bin/env ln -s /var/www/jana/current /var/www/jana/current as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [3ef2b012] Command: /usr/bin/env ln -s /var/www/jana/current /var/www/jana/current
-  INFO [3ef2b012] Finished in 2.293 seconds with exit status 0 (successful).
-  INFO [b6a87bf3] Running /usr/bin/env mv /var/www/jana/current /var/www/jana as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
- DEBUG [b6a87bf3] Command: /usr/bin/env mv /var/www/jana/current /var/www/jana
- DEBUG [b6a87bf3] 	mv: 
- DEBUG [b6a87bf3] 	'/var/www/jana/current' and '/var/www/jana/current' are the same file
- DEBUG [b6a87bf3] 	
-  INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 13:14:29 -0300 cap production deploy
-  INFO ---------------------------------------------------------------------------
-  INFO [9a4cfc18] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [9a4cfc18] Finished in 2.481 seconds with exit status 0 (successful).
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [3becc7d1] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [3becc7d1] Finished in 0.613 seconds with exit status 0 (successful).
-  INFO [57460cc4] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [57460cc4] Finished in 1.245 seconds with exit status 0 (successful).
-  INFO [5ecd7bf6] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [5ecd7bf6] Finished in 0.517 seconds with exit status 0 (successful).
-  INFO [3c4bd46b] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/logs /var/www/jana/shared/web/uploads as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [3c4bd46b] Finished in 0.556 seconds with exit status 0 (successful).
-  INFO [8acb0947] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/config as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [8acb0947] Finished in 0.565 seconds with exit status 0 (successful).
+  INFO [b2c561a9] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [b2c561a9] Finished in 1.774 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/git-ssh-jana-pro-root.sh 100.0%
+  INFO [7b0773ef] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-pro-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [7b0773ef] Finished in 0.481 seconds with exit status 0 (successful).
+  INFO [aa0daf74] Running /usr/bin/env git ls-remote https://github.com/muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [aa0daf74] Finished in 0.697 seconds with exit status 0 (successful).
+  INFO [595e387f] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [595e387f] Finished in 0.493 seconds with exit status 0 (successful).
+  INFO [67fa4c9b] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/logs /var/www/jana/shared/web/uploads as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [67fa4c9b] Finished in 0.477 seconds with exit status 0 (successful).
+  INFO [80ebf0ab] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/config as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [80ebf0ab] Finished in 0.476 seconds with exit status 0 (successful).
  ERROR linked file /var/www/jana/shared/app/config/parameters.yml does not exist on ec2-18-191-54-140.us-east-2.compute.amazonaws.com
   INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 13:21:39 -0300 cap production deploy:check
+  INFO START 2018-05-08 22:23:31 -0300 cap pro deploy
   INFO ---------------------------------------------------------------------------
-  INFO [60348b36] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [60348b36] Finished in 3.089 seconds with exit status 0 (successful).
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [219c046e] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [219c046e] Finished in 0.730 seconds with exit status 0 (successful).
-  INFO [e28e1c89] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [e28e1c89] Finished in 1.564 seconds with exit status 0 (successful).
-  INFO [4d3d0471] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [4d3d0471] Finished in 0.702 seconds with exit status 0 (successful).
-  INFO [10a09486] Running /usr/bin/env mkdir -p /var/www/jana/shared/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [10a09486] Finished in 0.925 seconds with exit status 0 (successful).
+  INFO [0d3837a3] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [0d3837a3] Finished in 2.138 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/git-ssh-jana-pro-root.sh 100.0%
+  INFO [2cca7836] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-pro-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [2cca7836] Finished in 0.481 seconds with exit status 0 (successful).
+  INFO [d2580946] Running /usr/bin/env git ls-remote https://github.com/muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [d2580946] Finished in 0.688 seconds with exit status 0 (successful).
+  INFO [2d5ef177] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [2d5ef177] Finished in 0.478 seconds with exit status 0 (successful).
+  INFO [fe1937cd] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/logs /var/www/jana/shared/web/uploads as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [fe1937cd] Finished in 0.488 seconds with exit status 0 (successful).
+  INFO [1ef14d3d] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/config as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [1ef14d3d] Finished in 0.500 seconds with exit status 0 (successful).
+ ERROR linked file /var/www/jana/shared/app/config/parameters.yml does not exist on ec2-18-191-54-140.us-east-2.compute.amazonaws.com
   INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 13:21:54 -0300 cap production deploy
+  INFO START 2018-05-08 22:26:38 -0300 cap pro deploy
   INFO ---------------------------------------------------------------------------
-  INFO [590ecfc2] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [590ecfc2] Finished in 2.327 seconds with exit status 0 (successful).
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [40a3d0fe] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [40a3d0fe] Finished in 0.618 seconds with exit status 0 (successful).
-  INFO [f2f5ce8a] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [f2f5ce8a] Finished in 2.646 seconds with exit status 0 (successful).
-  INFO [91560f37] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [91560f37] Finished in 0.655 seconds with exit status 0 (successful).
-  INFO [50cfdaa5] Running /usr/bin/env mkdir -p /var/www/jana/shared/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [50cfdaa5] Finished in 0.609 seconds with exit status 0 (successful).
+  INFO [d7d180af] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [d7d180af] Finished in 2.051 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/git-ssh-jana-pro-root.sh 100.0%
+  INFO [ec2f2616] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-pro-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [ec2f2616] Finished in 0.485 seconds with exit status 0 (successful).
+  INFO [391e4b8a] Running /usr/bin/env git ls-remote https://github.com/muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [391e4b8a] Finished in 0.716 seconds with exit status 0 (successful).
+  INFO [2fd470cd] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [2fd470cd] Finished in 0.480 seconds with exit status 0 (successful).
+  INFO [3c303a09] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/logs /var/www/jana/shared/web/uploads as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [3c303a09] Finished in 0.482 seconds with exit status 0 (successful).
+  INFO [7ed54f13] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/config as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [7ed54f13] Finished in 1.031 seconds with exit status 0 (successful).
+  INFO [f5ff7fb8] Running /usr/bin/env git clone --mirror https://github.com/muriloavila/jana.git /var/www/jana/repo as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [f5ff7fb8] Finished in 2.339 seconds with exit status 0 (successful).
+  INFO [f26c4816] Running /usr/bin/env git remote set-url origin https://github.com/muriloavila/jana.git as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [f26c4816] Finished in 0.484 seconds with exit status 0 (successful).
+  INFO [c479d2b1] Running /usr/bin/env git remote update --prune as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [c479d2b1] Finished in 0.681 seconds with exit status 0 (successful).
+  INFO [f59980ee] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509012645 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [f59980ee] Finished in 0.486 seconds with exit status 0 (successful).
+  INFO [73c7b702] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/jana/releases/20180509012645 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [73c7b702] Finished in 1.117 seconds with exit status 0 (successful).
+  INFO [c4ad7b1e] Running /usr/bin/env echo "56b2b25aee08e0043b3efc16340d3adb27408497" > REVISION as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [c4ad7b1e] Finished in 0.673 seconds with exit status 0 (successful).
+  INFO [47015f04] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509012645/app/config as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [47015f04] Finished in 0.484 seconds with exit status 0 (successful).
+  INFO [a0cfecc8] Running /usr/bin/env rm /var/www/jana/releases/20180509012645/app/config/parameters.yml as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [a0cfecc8] Finished in 0.497 seconds with exit status 0 (successful).
+  INFO [a71f7a2c] Running /usr/bin/env ln -s /var/www/jana/shared/app/config/parameters.yml /var/www/jana/releases/20180509012645/app/config/parameters.yml as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [a71f7a2c] Finished in 0.491 seconds with exit status 0 (successful).
+  INFO [61b15632] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509012645/app /var/www/jana/releases/20180509012645/web as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [61b15632] Finished in 0.829 seconds with exit status 0 (successful).
+  INFO [a1d33678] Running /usr/bin/env rm -rf /var/www/jana/releases/20180509012645/app/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [a1d33678] Finished in 0.486 seconds with exit status 0 (successful).
+  INFO [fa0d4b18] Running /usr/bin/env ln -s /var/www/jana/shared/app/logs /var/www/jana/releases/20180509012645/app/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [fa0d4b18] Finished in 0.481 seconds with exit status 0 (successful).
+  INFO [a528a85c] Running /usr/bin/env ln -s /var/www/jana/shared/web/uploads /var/www/jana/releases/20180509012645/web/uploads as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [a528a85c] Finished in 0.641 seconds with exit status 0 (successful).
+  INFO [e4d434cb] Running /usr/bin/env rm -rf /var/www/jana/releases/20180509012645/app/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [e4d434cb] Finished in 1.438 seconds with exit status 0 (successful).
+  INFO [11ee9d36] Running /usr/bin/env mkdir -pv app/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [11ee9d36] Finished in 0.813 seconds with exit status 0 (successful).
+  INFO [5366b69e] Running /usr/bin/env composer install --no-interaction --optimize-autoloader as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-05-08 22:29:43 -0300 cap pro deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [03bf913a] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [03bf913a] Finished in 2.144 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/git-ssh-jana-pro-root.sh 100.0%
+  INFO [3946ed4f] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-pro-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [3946ed4f] Finished in 0.475 seconds with exit status 0 (successful).
+  INFO [504b8526] Running /usr/bin/env git ls-remote https://github.com/muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [504b8526] Finished in 0.676 seconds with exit status 0 (successful).
+  INFO [e9df2193] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [e9df2193] Finished in 0.486 seconds with exit status 0 (successful).
+  INFO [7cacce02] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/logs /var/www/jana/shared/web/uploads as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [7cacce02] Finished in 0.482 seconds with exit status 0 (successful).
+  INFO [ae87b7dc] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/config as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [ae87b7dc] Finished in 0.481 seconds with exit status 0 (successful).
   INFO The repository mirror is at /var/www/jana/repo
-  INFO [2f61973d] Running /usr/bin/env git remote set-url origin git@github.com:muriloavila/jana.git as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [2f61973d] Finished in 0.579 seconds with exit status 0 (successful).
-  INFO [264f17c0] Running /usr/bin/env git remote update --prune as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [264f17c0] Finished in 1.345 seconds with exit status 0 (successful).
-  INFO [66b064bc] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180508162203 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [66b064bc] Finished in 0.587 seconds with exit status 0 (successful).
-  INFO [af2071ec] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/jana/releases/20180508162203 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [af2071ec] Finished in 1.350 seconds with exit status 0 (successful).
-  INFO [c65f1bdc] Running /usr/bin/env echo "56b2b25aee08e0043b3efc16340d3adb27408497" > REVISION as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [c65f1bdc] Finished in 1.136 seconds with exit status 0 (successful).
-  INFO [fae1477e] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180508162203/var as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [fae1477e] Finished in 1.152 seconds with exit status 0 (successful).
-  INFO [0e22d101] Running /usr/bin/env ln -s /var/www/jana/shared/var/logs /var/www/jana/releases/20180508162203/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [0e22d101] Finished in 0.759 seconds with exit status 0 (successful).
-  INFO [32f51bd7] Running /usr/bin/env mkdir -pv var/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [32f51bd7] Finished in 0.795 seconds with exit status 0 (successful).
-  INFO [8a7f172f] Running /usr/bin/env composer install --no-interaction --optimize-autoloader as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [88e68af9] Running /usr/bin/env git remote set-url origin https://github.com/muriloavila/jana.git as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [88e68af9] Finished in 0.489 seconds with exit status 0 (successful).
+  INFO [3db6e2a6] Running /usr/bin/env git remote update --prune as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [3db6e2a6] Finished in 0.697 seconds with exit status 0 (successful).
+  INFO [f0920b07] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509012950 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [f0920b07] Finished in 0.477 seconds with exit status 0 (successful).
+  INFO [f2d92bf2] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/jana/releases/20180509012950 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [f2d92bf2] Finished in 1.119 seconds with exit status 0 (successful).
+  INFO [18ac9ad7] Running /usr/bin/env echo "56b2b25aee08e0043b3efc16340d3adb27408497" > REVISION as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [18ac9ad7] Finished in 0.478 seconds with exit status 0 (successful).
+  INFO [e0494779] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509012950/app/config as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [e0494779] Finished in 0.824 seconds with exit status 0 (successful).
+  INFO [ba7334d0] Running /usr/bin/env rm /var/www/jana/releases/20180509012950/app/config/parameters.yml as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [ba7334d0] Finished in 0.484 seconds with exit status 0 (successful).
+  INFO [72ea8d38] Running /usr/bin/env ln -s /var/www/jana/shared/app/config/parameters.yml /var/www/jana/releases/20180509012950/app/config/parameters.yml as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [72ea8d38] Finished in 0.483 seconds with exit status 0 (successful).
+  INFO [242db22f] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509012950/app /var/www/jana/releases/20180509012950/web as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [242db22f] Finished in 0.831 seconds with exit status 0 (successful).
+  INFO [5ed4dcef] Running /usr/bin/env rm -rf /var/www/jana/releases/20180509012950/app/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [5ed4dcef] Finished in 0.488 seconds with exit status 0 (successful).
+  INFO [7660af3b] Running /usr/bin/env ln -s /var/www/jana/shared/app/logs /var/www/jana/releases/20180509012950/app/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [7660af3b] Finished in 1.021 seconds with exit status 0 (successful).
+  INFO [7e209600] Running /usr/bin/env ln -s /var/www/jana/shared/web/uploads /var/www/jana/releases/20180509012950/web/uploads as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [7e209600] Finished in 0.491 seconds with exit status 0 (successful).
+  INFO [d1bfd408] Running /usr/bin/env rm -rf /var/www/jana/releases/20180509012950/app/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [d1bfd408] Finished in 0.491 seconds with exit status 0 (successful).
+  INFO [1af871f5] Running /usr/bin/env mkdir -pv app/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [1af871f5] Finished in 0.628 seconds with exit status 0 (successful).
+  INFO [10c5a2b5] Running /usr/bin/env composer install --no-interaction --optimize-autoloader as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
   INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 13:24:11 -0300 cap production deploy:check
+  INFO START 2018-05-08 23:05:36 -0300 cap pro deploy
   INFO ---------------------------------------------------------------------------
-  INFO [07f64d3d] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [07f64d3d] Finished in 2.612 seconds with exit status 0 (successful).
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [8ad93103] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [8ad93103] Finished in 0.580 seconds with exit status 0 (successful).
-  INFO [90986455] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [90986455] Finished in 1.232 seconds with exit status 0 (successful).
-  INFO [3db9b1f2] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [3db9b1f2] Finished in 0.516 seconds with exit status 0 (successful).
-  INFO [19e39b6f] Running /usr/bin/env mkdir -p /var/www/jana/shared/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [19e39b6f] Finished in 0.557 seconds with exit status 0 (successful).
-  INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 13:27:32 -0300 cap production deploy
-  INFO ---------------------------------------------------------------------------
-  INFO [67165986] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [67165986] Finished in 2.329 seconds with exit status 0 (successful).
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [e3c21a0c] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [e3c21a0c] Finished in 0.578 seconds with exit status 0 (successful).
-  INFO [3f98d4da] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [3f98d4da] Finished in 1.318 seconds with exit status 0 (successful).
-  INFO [91fa69ba] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [91fa69ba] Finished in 0.550 seconds with exit status 0 (successful).
-  INFO [c81a4a51] Running /usr/bin/env mkdir -p /var/www/jana/shared/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [c81a4a51] Finished in 0.599 seconds with exit status 0 (successful).
+  INFO [170d0676] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [170d0676] Finished in 2.092 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/git-ssh-jana-pro-root.sh 100.0%
+  INFO [62bc26f6] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-pro-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [62bc26f6] Finished in 0.535 seconds with exit status 0 (successful).
+  INFO [669dec03] Running /usr/bin/env git ls-remote https://github.com/muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [669dec03] Finished in 0.977 seconds with exit status 0 (successful).
+  INFO [f3c63817] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [f3c63817] Finished in 0.574 seconds with exit status 0 (successful).
+  INFO [8bdca869] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/logs /var/www/jana/shared/web/uploads as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [8bdca869] Finished in 0.535 seconds with exit status 0 (successful).
+  INFO [fffaf1ef] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/config as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [fffaf1ef] Finished in 0.533 seconds with exit status 0 (successful).
   INFO The repository mirror is at /var/www/jana/repo
-  INFO [80e71080] Running /usr/bin/env git remote set-url origin git@github.com:muriloavila/jana.git as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [80e71080] Finished in 0.907 seconds with exit status 0 (successful).
-  INFO [c7dfe439] Running /usr/bin/env git remote update --prune as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [c7dfe439] Finished in 1.246 seconds with exit status 0 (successful).
-  INFO [8b48df8a] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180508162740 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [8b48df8a] Finished in 0.580 seconds with exit status 0 (successful).
-  INFO [db52c240] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/jana/releases/20180508162740 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [db52c240] Finished in 1.287 seconds with exit status 0 (successful).
-  INFO [9d03ed9d] Running /usr/bin/env echo "56b2b25aee08e0043b3efc16340d3adb27408497" > REVISION as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [9d03ed9d] Finished in 0.576 seconds with exit status 0 (successful).
-  INFO [4a35eb8f] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180508162740/var as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [4a35eb8f] Finished in 0.607 seconds with exit status 0 (successful).
-  INFO [70fcaa9d] Running /usr/bin/env ln -s /var/www/jana/shared/var/logs /var/www/jana/releases/20180508162740/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [70fcaa9d] Finished in 0.595 seconds with exit status 0 (successful).
-  INFO [c0e4aacb] Running /usr/bin/env mkdir -pv var/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [c0e4aacb] Finished in 0.570 seconds with exit status 0 (successful).
-  INFO [d1ffabbd] Running /usr/bin/env composer install --no-interaction --optimize-autoloader as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [b7f9b13e] Running /usr/bin/env git remote set-url origin https://github.com/muriloavila/jana.git as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [b7f9b13e] Finished in 0.555 seconds with exit status 0 (successful).
+  INFO [c59f551c] Running /usr/bin/env git remote update --prune as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [c59f551c] Finished in 0.814 seconds with exit status 0 (successful).
+  INFO [ec90579e] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509020543 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [ec90579e] Finished in 0.530 seconds with exit status 0 (successful).
+  INFO [7a3a9687] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/jana/releases/20180509020543 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [7a3a9687] Finished in 1.311 seconds with exit status 0 (successful).
+  INFO [7bcc62de] Running /usr/bin/env echo "56b2b25aee08e0043b3efc16340d3adb27408497" > REVISION as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [7bcc62de] Finished in 0.530 seconds with exit status 0 (successful).
+  INFO [febb54ef] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509020543/app/config as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [febb54ef] Finished in 0.528 seconds with exit status 0 (successful).
+  INFO [9d2e1ceb] Running /usr/bin/env rm /var/www/jana/releases/20180509020543/app/config/parameters.yml as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [9d2e1ceb] Finished in 0.532 seconds with exit status 0 (successful).
+  INFO [5b6a4830] Running /usr/bin/env ln -s /var/www/jana/shared/app/config/parameters.yml /var/www/jana/releases/20180509020543/app/config/parameters.yml as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [5b6a4830] Finished in 0.538 seconds with exit status 0 (successful).
+  INFO [f6f08a55] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509020543/app /var/www/jana/releases/20180509020543/web as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [f6f08a55] Finished in 0.544 seconds with exit status 0 (successful).
+  INFO [8f796e78] Running /usr/bin/env rm -rf /var/www/jana/releases/20180509020543/app/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [8f796e78] Finished in 0.529 seconds with exit status 0 (successful).
+  INFO [3f3c5e32] Running /usr/bin/env ln -s /var/www/jana/shared/app/logs /var/www/jana/releases/20180509020543/app/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [3f3c5e32] Finished in 0.527 seconds with exit status 0 (successful).
+  INFO [604754f8] Running /usr/bin/env ln -s /var/www/jana/shared/web/uploads /var/www/jana/releases/20180509020543/web/uploads as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [604754f8] Finished in 0.531 seconds with exit status 0 (successful).
+  INFO [81a149d7] Running /usr/bin/env rm -rf /var/www/jana/releases/20180509020543/app/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [81a149d7] Finished in 0.537 seconds with exit status 0 (successful).
+  INFO [ae2b478b] Running /usr/bin/env mkdir -pv app/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [ae2b478b] Finished in 0.532 seconds with exit status 0 (successful).
+  INFO [28ab39c3] Running /usr/bin/env composer install --no-interaction --optimize-autoloader as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [28ab39c3] Finished in 1.700 seconds with exit status 0 (successful).
+  INFO [0e80e41e] Running /usr/bin/env php app/console cache:warmup  --no-debug as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [0e80e41e] Finished in 0.729 seconds with exit status 0 (successful).
+  INFO [03321c04] Running /usr/bin/env rm -f app_*.php as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [03321c04] Finished in 0.531 seconds with exit status 0 (successful).
+  INFO [63f4de3b] Running /usr/bin/env curl -s https://getcomposer.org/installer | php  as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
   INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 13:30:03 -0300 cap production deploy:check
+  INFO START 2018-05-08 23:15:23 -0300 cap pro deploy
   INFO ---------------------------------------------------------------------------
-  INFO [29d736b4] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [29d736b4] Finished in 2.333 seconds with exit status 0 (successful).
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [842fd4fd] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [842fd4fd] Finished in 0.559 seconds with exit status 0 (successful).
-  INFO [5a11dc44] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [5a11dc44] Finished in 2.445 seconds with exit status 0 (successful).
-  INFO [105a4d44] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [105a4d44] Finished in 0.513 seconds with exit status 0 (successful).
-  INFO [b3284e85] Running /usr/bin/env mkdir -p /var/www/jana/shared/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [b3284e85] Finished in 0.548 seconds with exit status 0 (successful).
-  INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 13:30:22 -0300 cap production deploy
-  INFO ---------------------------------------------------------------------------
-  INFO [b7fc3a43] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [b7fc3a43] Finished in 2.360 seconds with exit status 0 (successful).
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [f67cfee2] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [f67cfee2] Finished in 0.608 seconds with exit status 0 (successful).
-  INFO [c7711f3b] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [c7711f3b] Finished in 1.245 seconds with exit status 0 (successful).
-  INFO [11f16e74] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [11f16e74] Finished in 0.533 seconds with exit status 0 (successful).
-  INFO [890df5ff] Running /usr/bin/env mkdir -p /var/www/jana/shared/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [890df5ff] Finished in 0.628 seconds with exit status 0 (successful).
+  INFO [e390cf12] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [e390cf12] Finished in 2.157 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/git-ssh-jana-pro-root.sh 100.0%
+  INFO [65d6eb5b] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-pro-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [65d6eb5b] Finished in 0.529 seconds with exit status 0 (successful).
+  INFO [0faa897f] Running /usr/bin/env git ls-remote https://github.com/muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [0faa897f] Finished in 0.723 seconds with exit status 0 (successful).
+  INFO [ad622bc5] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [ad622bc5] Finished in 3.623 seconds with exit status 0 (successful).
+  INFO [ad28ce6d] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/logs /var/www/jana/shared/web/uploads as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [ad28ce6d] Finished in 0.573 seconds with exit status 0 (successful).
+  INFO [36dbc405] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/config as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [36dbc405] Finished in 0.542 seconds with exit status 0 (successful).
   INFO The repository mirror is at /var/www/jana/repo
-  INFO [3f467ede] Running /usr/bin/env git remote set-url origin git@github.com:muriloavila/jana.git as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [3f467ede] Finished in 0.569 seconds with exit status 0 (successful).
-  INFO [51b493e1] Running /usr/bin/env git remote update --prune as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [51b493e1] Finished in 1.267 seconds with exit status 0 (successful).
-  INFO [91e8890d] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180508163029 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [91e8890d] Finished in 0.945 seconds with exit status 0 (successful).
-  INFO [ddffeb21] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/jana/releases/20180508163029 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [ddffeb21] Finished in 1.324 seconds with exit status 0 (successful).
-  INFO [c517e8ff] Running /usr/bin/env echo "56b2b25aee08e0043b3efc16340d3adb27408497" > REVISION as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [c517e8ff] Finished in 0.670 seconds with exit status 0 (successful).
-  INFO [e39d036f] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180508163029/var as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [e39d036f] Finished in 0.643 seconds with exit status 0 (successful).
-  INFO [77ba67da] Running /usr/bin/env ln -s /var/www/jana/shared/var/logs /var/www/jana/releases/20180508163029/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [77ba67da] Finished in 0.582 seconds with exit status 0 (successful).
-  INFO [2c09fb95] Running /usr/bin/env mkdir -pv var/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [2c09fb95] Finished in 0.573 seconds with exit status 0 (successful).
-  INFO [b52604b3] Running /usr/bin/env composer install --no-interaction --optimize-autoloader as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [c92c42db] Running /usr/bin/env git remote set-url origin https://github.com/muriloavila/jana.git as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [c92c42db] Finished in 3.339 seconds with exit status 0 (successful).
+  INFO [1c7ead0a] Running /usr/bin/env git remote update --prune as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [1c7ead0a] Finished in 0.733 seconds with exit status 0 (successful).
+  INFO [391ea470] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509021533 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [391ea470] Finished in 0.533 seconds with exit status 0 (successful).
+  INFO [cba819ca] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/jana/releases/20180509021533 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [cba819ca] Finished in 1.171 seconds with exit status 0 (successful).
+  INFO [b8f3e34a] Running /usr/bin/env echo "56b2b25aee08e0043b3efc16340d3adb27408497" > REVISION as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [b8f3e34a] Finished in 0.531 seconds with exit status 0 (successful).
+  INFO [ef3ef35b] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509021533/app/config as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [ef3ef35b] Finished in 0.531 seconds with exit status 0 (successful).
+  INFO [91299dbe] Running /usr/bin/env rm /var/www/jana/releases/20180509021533/app/config/parameters.yml as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [91299dbe] Finished in 0.537 seconds with exit status 0 (successful).
+  INFO [cb3f4902] Running /usr/bin/env ln -s /var/www/jana/shared/app/config/parameters.yml /var/www/jana/releases/20180509021533/app/config/parameters.yml as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [cb3f4902] Finished in 0.530 seconds with exit status 0 (successful).
+  INFO [79d6d5c5] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509021533/app /var/www/jana/releases/20180509021533/web as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [79d6d5c5] Finished in 0.541 seconds with exit status 0 (successful).
+  INFO [f73e217a] Running /usr/bin/env rm -rf /var/www/jana/releases/20180509021533/app/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [f73e217a] Finished in 0.530 seconds with exit status 0 (successful).
+  INFO [7d7a2630] Running /usr/bin/env ln -s /var/www/jana/shared/app/logs /var/www/jana/releases/20180509021533/app/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [7d7a2630] Finished in 0.530 seconds with exit status 0 (successful).
+  INFO [16372961] Running /usr/bin/env ln -s /var/www/jana/shared/web/uploads /var/www/jana/releases/20180509021533/web/uploads as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [16372961] Finished in 0.527 seconds with exit status 0 (successful).
+  INFO [c2a5d37b] Running /usr/bin/env rm -rf /var/www/jana/releases/20180509021533/app/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [c2a5d37b] Finished in 0.822 seconds with exit status 0 (successful).
+  INFO [6679b48a] Running /usr/bin/env mkdir -pv app/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [6679b48a] Finished in 0.624 seconds with exit status 0 (successful).
+  INFO [8484bed2] Running /usr/bin/env composer install --no-interaction --optimize-autoloader as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [8484bed2] Finished in 1.820 seconds with exit status 0 (successful).
+  INFO [806f0609] Running /usr/bin/env php app/console cache:warmup  --no-debug as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [806f0609] Finished in 0.725 seconds with exit status 0 (successful).
+  INFO [2f24cb5f] Running /usr/bin/env rm -f app_*.php as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [2f24cb5f] Finished in 0.690 seconds with exit status 0 (successful).
+  INFO [d57a9bf4] Running /usr/bin/env curl -s https://getcomposer.org/installer | php  as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
   INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 13:32:44 -0300 cap production deploy:check
+  INFO START 2018-05-08 23:20:36 -0300 cap pro deploy
   INFO ---------------------------------------------------------------------------
-  INFO [0485d0c6] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [0485d0c6] Finished in 2.380 seconds with exit status 0 (successful).
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [8f8354de] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [8f8354de] Finished in 0.562 seconds with exit status 0 (successful).
-  INFO [5e8fa29e] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [5e8fa29e] Finished in 1.622 seconds with exit status 0 (successful).
-  INFO [3ebfb0dd] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [3ebfb0dd] Finished in 0.634 seconds with exit status 0 (successful).
-  INFO [e05513fe] Running /usr/bin/env mkdir -p /var/www/jana/shared/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [e05513fe] Finished in 0.631 seconds with exit status 0 (successful).
-  INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 13:32:56 -0300 cap production deploy
-  INFO ---------------------------------------------------------------------------
-  INFO [ae46b608] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [ae46b608] Finished in 2.683 seconds with exit status 0 (successful).
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [b23faec3] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [b23faec3] Finished in 0.677 seconds with exit status 0 (successful).
-  INFO [29849a61] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [29849a61] Finished in 1.310 seconds with exit status 0 (successful).
-  INFO [f4619c19] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [f4619c19] Finished in 0.518 seconds with exit status 0 (successful).
-  INFO [8967dc56] Running /usr/bin/env mkdir -p /var/www/jana/shared/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [8967dc56] Finished in 0.577 seconds with exit status 0 (successful).
+  INFO [f2512597] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [f2512597] Finished in 1.998 seconds with exit status 0 (successful).
+  INFO Uploading /tmp/git-ssh-jana-pro-root.sh 100.0%
+  INFO [ce23af13] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-pro-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [ce23af13] Finished in 0.566 seconds with exit status 0 (successful).
+  INFO [99cbe7ef] Running /usr/bin/env git ls-remote https://github.com/muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [99cbe7ef] Finished in 0.747 seconds with exit status 0 (successful).
+  INFO [b2f1d267] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [b2f1d267] Finished in 0.546 seconds with exit status 0 (successful).
+  INFO [17beaf71] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/logs /var/www/jana/shared/web/uploads as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [17beaf71] Finished in 0.537 seconds with exit status 0 (successful).
+  INFO [87c0abef] Running /usr/bin/env mkdir -p /var/www/jana/shared/app/config as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [87c0abef] Finished in 0.546 seconds with exit status 0 (successful).
   INFO The repository mirror is at /var/www/jana/repo
-  INFO [9507d7fe] Running /usr/bin/env git remote set-url origin git@github.com:muriloavila/jana.git as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [9507d7fe] Finished in 0.608 seconds with exit status 0 (successful).
-  INFO [e614836c] Running /usr/bin/env git remote update --prune as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [e614836c] Finished in 1.345 seconds with exit status 0 (successful).
-  INFO [810bf181] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180508163304 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [810bf181] Finished in 0.603 seconds with exit status 0 (successful).
-  INFO [e5d60725] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/jana/releases/20180508163304 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [e5d60725] Finished in 1.616 seconds with exit status 0 (successful).
-  INFO [3fad36e1] Running /usr/bin/env echo "56b2b25aee08e0043b3efc16340d3adb27408497" > REVISION as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [3fad36e1] Finished in 0.564 seconds with exit status 0 (successful).
-  INFO [8c16421a] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180508163304/var as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [8c16421a] Finished in 0.614 seconds with exit status 0 (successful).
-  INFO [72d2a970] Running /usr/bin/env ln -s /var/www/jana/shared/var/logs /var/www/jana/releases/20180508163304/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [72d2a970] Finished in 0.562 seconds with exit status 0 (successful).
-  INFO [4c7c499a] Running /usr/bin/env mkdir -pv var/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [4c7c499a] Finished in 0.736 seconds with exit status 0 (successful).
-  INFO [16a0d5a5] Running ~/bin/composer install --no-interaction --optimize-autoloader as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 13:37:37 -0300 cap production deploy
-  INFO ---------------------------------------------------------------------------
-  INFO [1030e70e] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [1030e70e] Finished in 2.494 seconds with exit status 0 (successful).
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [b55ba28e] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [b55ba28e] Finished in 0.645 seconds with exit status 0 (successful).
-  INFO [cf5a108f] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [cf5a108f] Finished in 1.313 seconds with exit status 0 (successful).
-  INFO [36fe14c3] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [36fe14c3] Finished in 0.577 seconds with exit status 0 (successful).
-  INFO [44b46cd2] Running /usr/bin/env mkdir -p /var/www/jana/shared/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [44b46cd2] Finished in 0.616 seconds with exit status 0 (successful).
-  INFO The repository mirror is at /var/www/jana/repo
-  INFO [a9e80f05] Running /usr/bin/env git remote set-url origin git@github.com:muriloavila/jana.git as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [a9e80f05] Finished in 0.647 seconds with exit status 0 (successful).
-  INFO [f445228b] Running /usr/bin/env git remote update --prune as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [f445228b] Finished in 1.380 seconds with exit status 0 (successful).
-  INFO [5004da06] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180508163744 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [5004da06] Finished in 0.726 seconds with exit status 0 (successful).
-  INFO [ce697a46] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/jana/releases/20180508163744 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [ce697a46] Finished in 1.466 seconds with exit status 0 (successful).
-  INFO [370ef0fc] Running /usr/bin/env echo "56b2b25aee08e0043b3efc16340d3adb27408497" > REVISION as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [370ef0fc] Finished in 0.596 seconds with exit status 0 (successful).
-  INFO [175717ad] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180508163744/var as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [175717ad] Finished in 0.605 seconds with exit status 0 (successful).
-  INFO [44b53e8f] Running /usr/bin/env ln -s /var/www/jana/shared/var/logs /var/www/jana/releases/20180508163744/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [44b53e8f] Finished in 0.623 seconds with exit status 0 (successful).
-  INFO [f56a6474] Running /usr/bin/env mkdir -pv var/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [f56a6474] Finished in 0.602 seconds with exit status 0 (successful).
-  INFO [2b81e1ee] Running ~/bin/composer install --no-interaction --optimize-autoloader as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO ---------------------------------------------------------------------------
-  INFO START 2018-05-08 13:46:50 -0300 cap production deploy
-  INFO ---------------------------------------------------------------------------
-  INFO [e90d3bfc] Running /usr/bin/env mkdir -p /tmp as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [e90d3bfc] Finished in 2.477 seconds with exit status 0 (successful).
-  INFO Uploading /tmp/git-ssh-jana-production-root.sh 100.0%
-  INFO [fe07b719] Running /usr/bin/env chmod 700 /tmp/git-ssh-jana-production-root.sh as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [fe07b719] Finished in 0.684 seconds with exit status 0 (successful).
-  INFO [2da24af4] Running /usr/bin/env git ls-remote git@github.com:muriloavila/jana.git HEAD as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [2da24af4] Finished in 3.054 seconds with exit status 0 (successful).
-  INFO [d24ddb71] Running /usr/bin/env mkdir -p /var/www/jana/shared /var/www/jana/releases as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [d24ddb71] Finished in 0.528 seconds with exit status 0 (successful).
-  INFO [ba3276d0] Running /usr/bin/env mkdir -p /var/www/jana/shared/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [ba3276d0] Finished in 0.697 seconds with exit status 0 (successful).
-  INFO The repository mirror is at /var/www/jana/repo
-  INFO [892dce97] Running /usr/bin/env git remote set-url origin git@github.com:muriloavila/jana.git as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [892dce97] Finished in 0.577 seconds with exit status 0 (successful).
-  INFO [7b1c8a2f] Running /usr/bin/env git remote update --prune as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [7b1c8a2f] Finished in 1.364 seconds with exit status 0 (successful).
-  INFO [b00d360b] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180508164659 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [b00d360b] Finished in 0.581 seconds with exit status 0 (successful).
-  INFO [0e0b7e9b] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/jana/releases/20180508164659 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [0e0b7e9b] Finished in 1.322 seconds with exit status 0 (successful).
-  INFO [6c1a3a97] Running /usr/bin/env echo "56b2b25aee08e0043b3efc16340d3adb27408497" > REVISION as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [6c1a3a97] Finished in 0.572 seconds with exit status 0 (successful).
-  INFO [ac609261] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180508164659/var as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [ac609261] Finished in 0.650 seconds with exit status 0 (successful).
-  INFO [b08eb5af] Running /usr/bin/env ln -s /var/www/jana/shared/var/logs /var/www/jana/releases/20180508164659/var/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [b08eb5af] Finished in 0.636 seconds with exit status 0 (successful).
-  INFO [6c8a472c] Running /usr/bin/env mkdir -pv var/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
-  INFO [6c8a472c] Finished in 0.569 seconds with exit status 0 (successful).
-  INFO [027427a2] Running ~/bin/composer install --no-dev --prefer-dist --no-interaction --quiet --optimize-autoloader as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [6b6cb5eb] Running /usr/bin/env git remote set-url origin https://github.com/muriloavila/jana.git as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [6b6cb5eb] Finished in 0.540 seconds with exit status 0 (successful).
+  INFO [dcd8b30d] Running /usr/bin/env git remote update --prune as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [dcd8b30d] Finished in 0.745 seconds with exit status 0 (successful).
+  INFO [4b5791f1] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509022043 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [4b5791f1] Finished in 0.543 seconds with exit status 0 (successful).
+  INFO [ed457dd5] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/jana/releases/20180509022043 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [ed457dd5] Finished in 1.168 seconds with exit status 0 (successful).
+  INFO [dc4ed88e] Running /usr/bin/env echo "56b2b25aee08e0043b3efc16340d3adb27408497" > REVISION as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [dc4ed88e] Finished in 0.537 seconds with exit status 0 (successful).
+  INFO [77337bd5] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509022043/app/config as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [77337bd5] Finished in 0.552 seconds with exit status 0 (successful).
+  INFO [a8a0ba4a] Running /usr/bin/env rm /var/www/jana/releases/20180509022043/app/config/parameters.yml as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [a8a0ba4a] Finished in 0.543 seconds with exit status 0 (successful).
+  INFO [aa5b39f6] Running /usr/bin/env ln -s /var/www/jana/shared/app/config/parameters.yml /var/www/jana/releases/20180509022043/app/config/parameters.yml as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [aa5b39f6] Finished in 0.539 seconds with exit status 0 (successful).
+  INFO [b28af673] Running /usr/bin/env mkdir -p /var/www/jana/releases/20180509022043/app /var/www/jana/releases/20180509022043/web as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [b28af673] Finished in 0.542 seconds with exit status 0 (successful).
+  INFO [546e5f59] Running /usr/bin/env rm -rf /var/www/jana/releases/20180509022043/app/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [546e5f59] Finished in 0.546 seconds with exit status 0 (successful).
+  INFO [3f7f1d7c] Running /usr/bin/env ln -s /var/www/jana/shared/app/logs /var/www/jana/releases/20180509022043/app/logs as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [3f7f1d7c] Finished in 0.544 seconds with exit status 0 (successful).
+  INFO [d5f64482] Running /usr/bin/env ln -s /var/www/jana/shared/web/uploads /var/www/jana/releases/20180509022043/web/uploads as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [d5f64482] Finished in 0.549 seconds with exit status 0 (successful).
+  INFO [21e0337e] Running /usr/bin/env rm -rf /var/www/jana/releases/20180509022043/app/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [21e0337e] Finished in 0.556 seconds with exit status 0 (successful).
+  INFO [3b31fc44] Running /usr/bin/env mkdir -pv app/cache as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [3b31fc44] Finished in 0.547 seconds with exit status 0 (successful).
+  INFO [e0713126] Running /usr/bin/env composer install --no-interaction --optimize-autoloader as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [e0713126] Finished in 1.712 seconds with exit status 0 (successful).
+  INFO [c7f3bb1e] Running /usr/bin/env php app/console cache:warmup  --no-debug as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [c7f3bb1e] Finished in 0.765 seconds with exit status 0 (successful).
+  INFO [cd8e9e39] Running /usr/bin/env rm -f app_*.php as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [cd8e9e39] Finished in 0.544 seconds with exit status 0 (successful).
+  INFO [2859bce0] Running /usr/bin/env curl -s https://getcomposer.org/installer | php  as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [2859bce0] Finished in 1.545 seconds with exit status 0 (successful).
+  INFO [e473ccec] Running /usr/bin/env ln -s /var/www/jana/releases/20180509022043 /var/www/jana/releases/current as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [e473ccec] Finished in 0.601 seconds with exit status 0 (successful).
+  INFO [1dd308eb] Running /usr/bin/env mv /var/www/jana/releases/current /var/www/jana as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [1dd308eb] Finished in 0.614 seconds with exit status 0 (successful).
+  INFO Keeping 3 of 5 deployed releases on ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [db806e07] Running /usr/bin/env rm -rf /var/www/jana/releases/20180509012645 /var/www/jana/releases/20180509012950 as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [db806e07] Finished in 3.094 seconds with exit status 0 (successful).
+  INFO [1a5527e4] Running /usr/bin/env echo "Branch master (at 56b2b25aee08e0043b3efc16340d3adb27408497) deployed as release 20180509022043 by root" >> /var/www/jana/revisions.log as ubuntu@ec2-18-191-54-140.us-east-2.compute.amazonaws.com
+  INFO [1a5527e4] Finished in 0.566 seconds with exit status 0 (successful).
